@@ -1,0 +1,924 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<title>Alphagrow &mdash; Wealth Creation & Financial Security</title>
+<style>
+  :root {
+    --blue: #004AAD;
+    --blue-light: #2a6bdb;
+    --blue-bright: #6aa7ff;
+    --green: #7ED957;
+    --navy: #071e3f;
+    --navy-deep: #041426;
+    --text: #0b1b33;
+    --muted: #5a6b82;
+    --line: #e3ebf8;
+    --surface: #f5f8ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); background: #ffffff; line-height: 1.6; overflow-x: hidden; }
+  a { text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- NAV ---------- */
+  header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(255,255,255,.96); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 0; border-radius: 0; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 70px; padding: 0 24px; max-width: 100%; }
+  .brand { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -.02em; flex-shrink: 0; }
+  .brand span { color: var(--green); }
+  .brand-logo { height: 44px; width: auto; display: block; object-fit: contain; }
+  .nav-links { display: flex; gap: 30px; align-items: center; margin-left: auto; }
+  .nav-links a { color: #0b1b33; font-size: 15px; font-weight: 500; transition: color .15s ease; }
+  .nav-links a:hover { color: var(--blue); }
+  .nav-cta { padding: 10px 22px; background: var(--green); color: #04281a !important; border-radius: 0; font-weight: 700; transition: transform .15s ease; }
+  .nav-cta:hover { transform: translateY(-1px); color: #04281a; }
+  .menu-btn { display: none; background: none; border: 0; color: var(--blue); font-size: 26px; cursor: pointer; }
+
+  /* ---------- HERO (09 Dark Blue) ---------- */
+  .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 24px 40px; position: relative; overflow: hidden; background: var(--navy); color: #fff; }
+  .hero::before { content: ''; position: absolute; inset: 0;
+    background:
+      linear-gradient(rgba(7,30,63,.86), rgba(7,30,63,.78)),
+      url('images/stock-market-trader-work.webp') center/cover no-repeat; }
+  .hero::after { content: ''; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(50% 45% at 30% 15%, rgba(126,217,87,.14), transparent 60%),
+      radial-gradient(55% 50% at 75% 80%, rgba(106,167,255,.2), transparent 60%); }
+  .hero .inner { position: relative; z-index: 1; max-width: 820px; }
+  .badge { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(126,217,87,.5); color: var(--green); padding: 8px 16px; border-radius: 999px; font-size: 14px; font-weight: 600; margin-bottom: 26px; }
+  .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(126,217,87,.2); }
+  .hero h1 { font-size: clamp(2.4rem, 6vw, 4.4rem); line-height: 1.08; letter-spacing: -0.02em; }
+  .hero h1 .bright { color: var(--blue-bright); }
+  .hero h1 .green { color: var(--green); }
+  .hero p { font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(255,255,255,.82); margin: 24px auto 40px; max-width: 620px; }
+  .hero .hero-tag { color: var(--green); font-weight: 700; font-size: clamp(1.05rem, 2vw, 1.35rem); margin: -20px auto 0; }
+  .cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .hero .btn { border-radius: 0; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 16px 34px; border-radius: 12px; font-size: 16px; font-weight: 700; transition: transform .15s ease, box-shadow .15s ease; cursor: pointer; }
+  .btn-green { background: var(--green); color: #04281a; box-shadow: 0 12px 34px rgba(126,217,87,.4); }
+  .btn-green:hover { transform: translateY(-2px); }
+  .btn-ghost { border: 1px solid rgba(255,255,255,.4); color: #fff; }
+  .btn-ghost:hover { background: rgba(255,255,255,.08); }
+  .hero-trust { margin-top: 46px; display: flex; gap: 34px; color: rgba(255,255,255,.6); font-size: 14px; flex-wrap: wrap; justify-content: center; }
+  .scroll { margin-top: 44px; color: rgba(255,255,255,.6); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+
+  /* ---------- LOGOS ---------- */
+  .logos { background: #fff; padding: 44px 24px; text-align: center; }
+  .logos p { color: var(--muted); font-size: 13px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 26px; }
+  .logo-row { display: flex; gap: 44px; justify-content: center; flex-wrap: wrap; color: #8b99ad; font-weight: 700; font-size: 16px; }
+
+  /* ---------- SECTIONS ---------- */
+  section.block { padding: 96px 0; }
+  .about { background: #eef4ff; }
+  .about-head { margin-bottom: 48px; }
+  .section-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
+  .eyebrow { color: var(--green); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: 13px; }
+  .section-head h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); color: var(--blue); letter-spacing: -0.02em; margin: 12px 0 14px; line-height: 1.15; }
+  .section-head .green { color: var(--green); }
+  .section-head p { color: var(--muted); font-size: 1.05rem; }
+
+  /* features */
+  .features { background: #fff; }
+  .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .feat { padding: 30px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); transition: transform .15s ease, box-shadow .15s ease; }
+  .feat:hover { transform: translateY(-5px); box-shadow: 0 20px 44px rgba(0,74,173,.14); }
+  .feat .icon { width: 54px; height: 54px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 18px; }
+  .icon-blue { background: var(--blue); color: #fff; }
+  .icon-green { background: var(--green); color: #04281a; }
+  .feat h3 { font-size: 18px; color: var(--text); margin-bottom: 10px; }
+
+  /* services (04 dark navy) */
+  .services { background: var(--navy); color: #fff; }
+  .services .section-head h2 { color: #fff; }
+  .services .section-head p { color: rgba(255,255,255,.7); }
+  .services .section-head .green { color: var(--green); }
+  .svc-carousel { overflow: hidden; position: relative; width: 100vw; left: 50%; transform: translateX(-50%); }
+  .svc-track { display: flex; width: max-content; animation: svc-scroll 48s linear infinite; }
+  .svc-carousel:hover .svc-track { animation-play-state: paused; }
+  .svc-card { flex: 0 0 auto; width: 340px; margin-right: 24px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 0; padding: 30px; transition: transform .15s ease; }
+  .svc-card:hover { transform: translateY(-4px); }
+  .svc-card .icon { width: 54px; height: 54px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 18px; }
+  .svc-icon-blue { background: rgba(0,74,173,.45); color: var(--green); }
+  .svc-icon-green { background: rgba(126,217,87,.18); color: var(--green); }
+  .svc-card h3 { font-size: 18px; color: #fff; margin-bottom: 10px; }
+  .svc-card p { color: rgba(255,255,255,.7); font-size: 15px; line-height: 1.65; }
+  .svc-card .link { display: inline-block; margin-top: 14px; color: var(--green); text-decoration: none; font-weight: 700; font-size: 14px; }
+  @keyframes svc-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (max-width: 640px) { .svc-card { width: 270px; } }
+  @media (prefers-reduced-motion: reduce) { .svc-track { animation: none; } }
+
+  /* calculators (02 featured hero) */
+  .calcs { background: #f1f9ec; }
+  .calc-featured { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; background: var(--blue); color: #fff; padding: 44px clamp(28px, 5vw, 56px); margin-bottom: 40px; position: relative; overflow: hidden; }
+  .calc-featured::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(55% 70% at 85% 15%, rgba(126,217,87,.2), transparent 60%); }
+  .calc-featured .cf-left, .calc-featured .cf-right { position: relative; z-index: 1; }
+  .calc-featured .icon { width: 60px; height: 60px; border-radius: 0; background: rgba(126,217,87,.2); color: var(--green); display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 18px; }
+  .calc-featured h3 { font-size: 1.6rem; margin-bottom: 10px; color: #fff; }
+  .calc-featured p { color: rgba(255,255,255,.8); font-size: 15px; line-height: 1.6; }
+  .calc-featured .open { display: inline-block; margin-top: 18px; background: var(--green); color: #04281a; padding: 12px 28px; font-weight: 800; text-decoration: none; border-radius: 0; }
+  .calc-quick input { width: 100%; padding: 13px 16px; margin-bottom: 12px; border: 0; border-radius: 0; font-size: 15px; }
+  .calc-quick .result { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); padding: 14px 16px; font-size: 14px; }
+  .calc-quick .result strong { color: var(--green); font-size: 20px; display: block; margin-top: 4px; }
+  .calc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .calc-link { background: #fff; border: 1px solid var(--line); border-radius: 0; padding: 16px 20px; display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); transition: transform .15s ease, box-shadow .15s ease; }
+  .calc-link:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0,74,173,.12); }
+  .calc-link .dot { width: 34px; height: 34px; flex-shrink: 0; border-radius: 0; display: flex; align-items: center; justify-content: center; font-size: 15px; }
+  .calc-link span { font-size: 14px; font-weight: 600; }
+  .calc-link.active { border-color: var(--blue); box-shadow: 0 0 0 2px rgba(0,74,173,.15); }
+  @media (max-width: 960px) { .calc-featured { grid-template-columns: 1fr; } }
+
+  /* blogs (BS01 carousel + card group) */
+  .blogs { background: #ffffff; }
+  .ag-badge { background: var(--green); color: #04281a; }
+  .ag-tile { height: 140px; display: flex; align-items: center; justify-content: center; font-size: 36px; }
+  .tile-b { background: linear-gradient(135deg, var(--blue), var(--blue-light)); color: var(--green); }
+  .tile-g { background: linear-gradient(135deg, #0a6b3a, var(--green)); color: #fff; }
+  .tile-navy { background: linear-gradient(135deg, var(--navy), var(--blue)); color: var(--green); }
+  .blog-carousel .carousel-inner .ag-tile { height: 320px; font-size: 66px; }
+  .blog-carousel .carousel-caption { background: linear-gradient(180deg, transparent, rgba(7,30,63,.72)); left: 0; right: 0; bottom: 0; padding: 60px 24px 28px; }
+  .blog-carousel .carousel-caption h3 { font-weight: 800; text-shadow: 0 2px 8px rgba(0,0,0,.4); }
+  .blog-carousel .carousel-caption .btn { border-radius: 0; }
+  .ag-card { border: 1px solid var(--line); border-radius: 0; transition: transform .15s ease, box-shadow .15s ease; height: 100%; }
+  .ag-card:hover { transform: translateY(-5px); box-shadow: 0 20px 44px rgba(0,74,173,.12); }
+  .ag-card .card-body { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+  .ag-card .card-body .ag-link { margin-top: auto; }
+  .ag-card h5 { color: var(--text); }
+  .ag-card p { color: var(--muted); }
+  .cat { color: var(--green); font-weight: 700; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
+  .ag-link { color: var(--blue); font-weight: 700; text-decoration: none; }
+  .feat p { color: var(--muted); font-size: 15px; }
+  @media (max-width: 768px) {
+    .blog-carousel .carousel-inner .ag-tile { height: 240px; font-size: 48px; }
+    .blog-carousel .carousel-caption h3 { font-size: 1.2rem; }
+    .blog-carousel .carousel-caption .btn { padding: 8px 18px; font-size: .85rem; }
+    .blog-carousel .card-group { gap: 16px; }
+    .blog-carousel .card-group .ag-tile { height: 120px; font-size: 28px; }
+    .blog-carousel .card-group .card h5 { font-size: 1rem; }
+  }
+  .blog-carousel .card-group { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; align-items: stretch; }
+  .blog-carousel .card-group > .card { margin-bottom: 0; border-radius: 0; height: 100%; }
+  .blog-carousel .card-group .ag-tile { width: 100%; height: 140px; }
+  .blog-carousel .card-group .card-body { flex: 1 1 auto; }
+
+  /* dashboard (unused - kept for reference)
+  .dashboard { background: var(--surface); }
+  .dash-wrap { max-width: 980px; margin: 0 auto; background: #fff; border-radius: 18px; border: 1px solid var(--line); box-shadow: 0 40px 80px rgba(0,74,173,.16); overflow: hidden; }
+  .chrome { display: flex; align-items: center; gap: 8px; padding: 14px 18px; background: #f5f8ff; border-bottom: 1px solid var(--line); }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+  .url { flex: 1; margin-left: 14px; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 6px 14px; font-size: 13px; color: var(--muted); }
+  .dash-body { padding: 28px; }
+  .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
+  .kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+  .kpi strong { color: var(--blue); font-size: 22px; display: block; }
+  .kpi span { color: var(--muted); font-size: 13px; }
+  .chart { height: 200px; border-radius: 12px; overflow: hidden; position: relative; }
+  .chart img { width: 100%; height: 100%; object-fit: cover; }
+  */
+
+  /* stats */
+  .stats { background: var(--navy); color: #fff; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center; }
+  .stat strong { font-size: clamp(1.8rem, 4vw, 2.6rem); color: #fff; display: block; }
+  .stat .green { color: var(--green); }
+  .stat span { color: rgba(255,255,255,.65); font-size: 15px; margin-top: 6px; display: inline-block; }
+
+  /* how it works */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .steps-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+  .step { text-align: center; padding: 28px; }
+  .step .num { width: 60px; height: 60px; margin: 0 auto 18px; border-radius: 50%; background: linear-gradient(135deg, var(--blue), var(--green)); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 800; box-shadow: 0 12px 26px rgba(0,74,173,.3); }
+  .step h3 { color: var(--blue); margin-bottom: 10px; }
+  .step p { color: var(--muted); font-size: 15px; }
+
+  /* about */
+  .about-split { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 56px; }
+  .about-copy .eyebrow { margin-bottom: 12px; }
+  .about-copy h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); color: var(--blue); letter-spacing: -0.02em; margin-bottom: 22px; line-height: 1.2; }
+  .about-copy h2 .green { color: var(--green); }
+  .about-copy p { color: var(--muted); margin-bottom: 16px; font-size: 1.02rem; }
+  .about-media { border-radius: 0; overflow: hidden; box-shadow: 0 30px 60px rgba(0,74,173,.25); }
+  .about-media img { width: 100%; height: 460px; object-fit: cover; }
+
+  /* why choose */
+  .why { background: var(--surface); }
+  .why .feat { background: #fff; border-radius: 0; }
+
+  /* FAQ */
+  .faq-accordion { max-width: 780px; margin: 0 auto; display: grid; gap: 14px; }
+  .faq-accordion .accordion-item { border: 1px solid var(--line); border-radius: 0 !important; background: var(--surface); overflow: hidden; }
+  .faq-accordion .accordion-button { background: var(--surface); color: var(--text); font-weight: 600; font-size: 16px; padding: 20px 24px; box-shadow: none; }
+  .faq-accordion .accordion-button:not(.collapsed) { background: var(--surface); color: var(--blue); }
+  .faq-accordion .accordion-button:focus { box-shadow: 0 0 0.25rem rgba(0,74,173,.25); }
+  .faq-accordion .accordion-button::after { filter: none; }
+  .faq-accordion .accordion-button:not(.collapsed)::after { background-image: var(--bs-accordion-btn-active-icon); }
+  .faq-accordion .accordion-body { padding: 0 24px 20px; color: var(--muted); font-size: 15px; }
+
+  /* testimonials */
+  .testimonials { background: var(--surface); color: var(--text); }
+  .testimonials .section-head h2 { color: var(--blue); }
+  .t-card { background: #fff; border: 1px solid var(--line); height: 100%; transition: transform .15s ease, box-shadow .15s ease; }
+  .t-card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(0,74,173,.12); }
+  .t-card .t-head { display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--line); padding: 16px 20px; }
+  .t-card .avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--blue), var(--green)); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
+  .t-card .t-head strong { display: block; font-size: 14px; color: var(--text); }
+  .t-card .t-head span { font-size: 12px; color: var(--muted); }
+  .t-card .verified { margin-left: auto; color: var(--green); font-size: 12px; font-weight: 700; }
+  .t-card .t-body { padding: 20px; }
+  .t-card .stars { color: var(--green); font-size: .9rem; letter-spacing: 3px; margin-bottom: 10px; }
+  .t-card .t-body p { font-style: italic; color: var(--muted); font-size: 14px; line-height: 1.7; margin-bottom: 0; }
+
+  /* contact */
+  .info-panel { background: var(--blue); background-image: radial-gradient(60% 60% at 85% 10%, rgba(126,217,87,.18), transparent 60%); color: #fff; padding: 44px 36px; height: 100%; }
+  .info-panel h3 { font-size: 1.5rem; margin-bottom: 12px; }
+  .info-panel > p { color: rgba(255,255,255,.8); margin-bottom: 28px; }
+  .info-item { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 20px; }
+  .info-item .ic { width: 46px; height: 46px; flex-shrink: 0; background: rgba(126,217,87,.18); border: 1px solid rgba(126,217,87,.35); color: var(--green); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+  .info-item strong { display: block; font-size: 14px; }
+  .info-item span, .info-item a { color: rgba(255,255,255,.82); font-size: 14px; display: block; }
+  .info-item a:hover { color: var(--green); }
+  .form-panel { background: var(--surface); border: 1px solid var(--line); padding: 40px clamp(24px,4vw,44px); height: 100%; }
+  .form-panel .form-label { font-weight: 600; color: var(--text); }
+  .form-control, .form-select { border-radius: 0; border: 1px solid var(--line); padding: .65rem 1rem; }
+  .form-control:focus, .form-select:focus { border-color: var(--blue); box-shadow: 0 0 0 .2rem rgba(0,74,173,.15); }
+  .btn-submit { border-radius: 0; background: var(--green); color: #04281a; font-weight: 700; padding: .7rem 1.6rem; border: 0; }
+  .btn-submit:hover { background: #6fd14b; color: #04281a; }
+
+  /* pricing (unused - kept for reference)
+  .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
+  .price { border: 1px solid var(--line); border-radius: 18px; padding: 34px; background: #fff; position: relative; display: flex; flex-direction: column; }
+  .price.popular { border: 2px solid var(--blue); box-shadow: 0 24px 50px rgba(0,74,173,.18); }
+  .price .flag { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--blue); color: #fff; padding: 5px 16px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .price h3 { color: var(--blue); font-size: 20px; }
+  .price .amount { font-size: 2.6rem; color: var(--text); margin: 14px 0 4px; font-weight: 800; }
+  .price .amount small { font-size: 15px; color: var(--muted); font-weight: 400; }
+  .price p.desc { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
+  .price ul { list-style: none; margin-bottom: 28px; }
+  .price ul li { padding: 8px 0; color: var(--text); font-size: 15px; border-top: 1px solid var(--line); }
+  .price ul li:first-of-type { border-top: 0; }
+  .price ul li .yes { color: var(--green); }
+  .price .btn { justify-content: center; width: 100%; margin-top: auto; }
+  .btn-outline { border: 2px solid var(--blue); color: var(--blue); }
+  .btn-outline:hover { background: var(--surface); }
+  */
+
+  /* final CTA */
+  .cta-band { background: linear-gradient(135deg, var(--blue), var(--navy)); color: #fff; text-align: center; }
+  .cta-band h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); letter-spacing: -0.02em; margin-bottom: 16px; }
+  .cta-band h2 .green { color: var(--green); }
+  .cta-band p { color: rgba(255,255,255,.8); max-width: 620px; margin: 0 auto 20px; }
+  .cta-band .cta-sub { color: #fff; font-weight: 700; font-size: 1.1rem; }
+  .cta-band .cta-phone { margin-top: 8px; }
+  .cta-band .cta-phone a { color: #fff; font-weight: 700; font-size: 1.1rem; text-decoration: underline; text-decoration-color: var(--green); text-underline-offset: 6px; }
+  .cta-band .btn-green { box-shadow: 0 12px 34px rgba(0,0,0,.25); }
+
+  /* footer */
+  footer { background: var(--navy-deep); color: rgba(255,255,255,.7); padding: 60px 0 30px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 44px; }
+  .footer-brand .brand { font-size: 24px; margin-bottom: 14px; }
+  .footer-brand .brand img { filter: brightness(1.25); }
+  .footer-brand p { font-size: 14px; max-width: 260px; }
+  .footer-col h4 { color: #fff; font-size: 15px; margin-bottom: 16px; }
+  .footer-col a { display: block; color: rgba(255,255,255,.7); font-size: 14px; padding: 6px 0; transition: color .15s ease; }
+  .footer-col a:hover { color: var(--green); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 24px; font-size: 13px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+  /* responsive */
+  @media (max-width: 960px) {
+    .feat-grid, .calc-grid, .steps, .steps-4, .price-grid, .stats-grid { grid-template-columns: 1fr 1fr; }
+    .about-split { grid-template-columns: 1fr; gap: 32px; }
+    .about-media img { height: 300px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .menu-btn { display: block; }
+    .feat-grid, .calc-grid, .steps, .steps-4, .price-grid, .stats-grid { grid-template-columns: 1fr; }
+    .kpis { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ======= NAV ======= -->
+  <header>
+    <div class="nav-inner">
+      <a href="#" class="brand"><img class="brand-logo" src="images/logo.png" alt="Alpha Grow logo" width="170" height="44"></a>
+      <nav class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#calculators">Calculator</a>
+        <a href="#blogs">Blogs</a>
+        <a href="#">Contact Us</a>
+        <a href="tel:+0000000000">+91 00000 00000</a>
+        <a href="#" class="nav-cta">Invest Now</a>
+      </nav>
+      <button class="menu-btn" aria-label="Menu">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- ======= HERO (09 Dark Blue) ======= -->
+  <section class="hero" id="home">
+    <div class="inner">
+      <span class="badge"><span class="dot"></span> Your Trusted Partner in Wealth Creation &amp; Financial Security</span>
+      <h1>Grow Smarter. <span class="green">Secure Tomorrow.</span></h1>
+      <p style="text-align: center;">Whether you're planning for your family's future, building wealth, or preparing for retirement, Alphagrow provides personalized financial solutions designed to help you achieve your life goals with confidence.</p>
+      <div class="cta">
+        <a href="#contact" class="btn btn-green">Get Free Consultation</a>
+        <a href="#services" class="btn btn-ghost">Explore Services &#8594;</a>
+      </div>
+    </div>
+    <span class="scroll">Scroll to explore &#8595;</span>
+  </section>
+
+  <!-- ======= ABOUT ======= -->
+  <section class="block about" id="about">
+    <div class="container">
+      <div class="section-head about-head">
+        <div class="eyebrow">About Alphagrow</div>
+      </div>
+      <div class="about-split">
+        <div class="about-copy">
+          <h2>Building Wealth Through <span class="green">Smart Financial Decisions</span></h2>
+          <p style="text-align: justify;">At Alphagrow, we believe financial success isn't about chance&mdash;it's about careful planning, informed decisions, and disciplined investing. Our experienced advisors work closely with individuals, families, and professionals to create customized financial strategies that protect, grow, and preserve wealth.</p>
+          <p style="text-align: justify;">We simplify complex financial decisions so you can focus on living your life while your investments work for your future.</p>
+        </div>
+        <div class="about-media">
+          <img src="images/stock-market-trader-work.webp" alt="Financial advisor guiding wealth planning" width="768" height="460">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= SERVICES ======= -->
+  <section class="block services" id="services">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Our Services</div>
+        <h2>Comprehensive <span class="green">Financial Solutions</span></h2>
+      </div>
+      <div class="svc-carousel">
+        <div class="svc-track">
+          <div class="svc-card">
+            <div class="icon svc-icon-blue">&#128202;</div>
+            <h3>Personal Financial Planning</h3>
+            <p>Create a personalized roadmap to achieve your short-term and long-term financial goals with structured planning and expert advice.</p>
+            <a href="#" class="link">Explore &#8594;</a>
+          </div>
+          <div class="svc-card">
+            <div class="icon svc-icon-green">&#128200;</div>
+            <h3>Mutual Fund Investment</h3>
+            <p>Grow your wealth through professionally managed mutual fund investments aligned with your risk profile and financial objectives.</p>
+            <a href="#" class="link">Explore &#8594;</a>
+          </div>
+          <div class="svc-card">
+            <div class="icon svc-icon-blue">&#127891;</div>
+            <h3>Child Education Investment</h3>
+            <p>Build a dedicated education fund that secures your child's future with disciplined, goal-oriented investing.</p>
+            <a href="#" class="link">Explore &#8594;</a>
+          </div>
+          <div class="svc-card">
+            <div class="icon svc-icon-green">&#127919;</div>
+            <h3>Goal Based Investment</h3>
+            <p>Every investment aligned with your life milestones &mdash; from buying a home to starting a business.</p>
+            <a href="#" class="link">Explore &#8594;</a>
+          </div>
+          <div class="svc-card">
+            <div class="icon svc-icon-blue">&#127983;</div>
+            <h3>Retirement Planning</h3>
+            <p>Build a secure retirement corpus with strategies designed to provide financial independence and peace of mind after retirement.</p>
+            <a href="#" class="link">Explore &#8594;</a>
+          </div>
+          <div class="svc-card">
+            <div class="icon svc-icon-green">&#128138;</div>
+            <h3>Health Insurance Plan</h3>
+            <p>Protect your family from medical emergencies with comprehensive health insurance plans tailored to your needs.</p>
+            <a href="#" class="link">Explore &#8594;</a>
+          </div>
+          <div class="svc-card">
+            <div class="icon svc-icon-blue">&#128737;</div>
+            <h3>Life Insurance Plan</h3>
+            <p>Secure your loved ones' financial future with carefully selected life insurance plans that offer complete protection.</p>
+            <a href="#" class="link">Explore &#8594;</a>
+          </div>
+          <div class="svc-card">
+            <div class="icon svc-icon-green">&#128179;</div>
+            <h3>Emergency Fund</h3>
+            <p>Build a safety net that keeps you prepared for unexpected expenses and protects your long-term financial goals.</p>
+            <a href="#" class="link">Explore &#8594;</a>
+          </div>
+          <div class="svc-card">
+            <div class="icon svc-icon-blue">&#128181;</div>
+            <h3>Bonds</h3>
+            <p>Diversify your portfolio with government and corporate bonds that provide reliable income and long-term financial stability.</p>
+            <a href="#" class="link">Explore &#8594;</a>
+          </div>
+          <div class="svc-card">
+            <div class="icon svc-icon-blue">&#128202;</div>
+            <h3>Personal Financial Planning</h3>
+            <p>Create a personalized roadmap to achieve your short-term and long-term financial goals with structured planning and expert advice.</p>
+            <a href="#" class="link">Explore &#8594;</a>
+          </div>
+          <div class="svc-card">
+            <div class="icon svc-icon-green">&#128200;</div>
+            <h3>Mutual Fund Investment</h3>
+            <p>Grow your wealth through professionally managed mutual fund investments aligned with your risk profile and financial objectives.</p>
+            <a href="#" class="link">Explore &#8594;</a>
+          </div>
+          <div class="svc-card">
+            <div class="icon svc-icon-blue">&#127891;</div>
+            <h3>Child Education Investment</h3>
+            <p>Build a dedicated education fund that secures your child's future with disciplined, goal-oriented investing.</p>
+            <a href="#" class="link">Explore &#8594;</a>
+          </div>
+          <div class="svc-card">
+            <div class="icon svc-icon-green">&#127919;</div>
+            <h3>Goal Based Investment</h3>
+            <p>Every investment aligned with your life milestones &mdash; from buying a home to starting a business.</p>
+            <a href="#" class="link">Explore &#8594;</a>
+          </div>
+          <div class="svc-card">
+            <div class="icon svc-icon-blue">&#127983;</div>
+            <h3>Retirement Planning</h3>
+            <p>Build a secure retirement corpus with strategies designed to provide financial independence and peace of mind after retirement.</p>
+            <a href="#" class="link">Explore &#8594;</a>
+          </div>
+          <div class="svc-card">
+            <div class="icon svc-icon-green">&#128138;</div>
+            <h3>Health Insurance Plan</h3>
+            <p>Protect your family from medical emergencies with comprehensive health insurance plans tailored to your needs.</p>
+            <a href="#" class="link">Explore &#8594;</a>
+          </div>
+          <div class="svc-card">
+            <div class="icon svc-icon-blue">&#128737;</div>
+            <h3>Life Insurance Plan</h3>
+            <p>Secure your loved ones' financial future with carefully selected life insurance plans that offer complete protection.</p>
+            <a href="#" class="link">Explore &#8594;</a>
+          </div>
+          <div class="svc-card">
+            <div class="icon svc-icon-green">&#128179;</div>
+            <h3>Emergency Fund</h3>
+            <p>Build a safety net that keeps you prepared for unexpected expenses and protects your long-term financial goals.</p>
+            <a href="#" class="link">Explore &#8594;</a>
+          </div>
+          <div class="svc-card">
+            <div class="icon svc-icon-blue">&#128181;</div>
+            <h3>Bonds</h3>
+            <p>Diversify your portfolio with government and corporate bonds that provide reliable income and long-term financial stability.</p>
+            <a href="#" class="link">Explore &#8594;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= CALCULATORS ======= -->
+  <section class="block calcs" id="calculators">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Free Financial Calculators</div>
+        <h2>Calculate Your <span class="green">Financial Future</span></h2>
+        <p>Plan smarter with our suite of easy-to-use financial calculators.</p>
+      </div>
+      <div class="calc-featured" id="calc-featured">
+        <div class="cf-left">
+          <div class="icon" id="cf-icon">&#128200;</div>
+          <h3 id="cf-title">Start with SIP Calculator</h3>
+          <p id="cf-desc">See how your monthly investments can grow over time with our most popular calculator.</p>
+          <a href="#" class="open">Open Full Calculator</a>
+        </div>
+        <div class="cf-right calc-quick" id="cf-form">
+          <input type="number" id="sip-amount" placeholder="Monthly investment (&#8377;)" value="5000">
+          <input type="number" id="sip-rate" placeholder="Expected return (%)" value="12">
+          <input type="number" id="sip-years" placeholder="Years" value="10">
+          <div class="result">Maturity Value<strong id="sip-out">&#8377; --</strong></div>
+        </div>
+      </div>
+      <div class="calc-grid">
+        <a href="#" class="calc-link" data-calc="lumpsum"><div class="dot" style="background:#004AAD;color:#fff">&#128181;</div><span>Lumpsum Calculator</span></a>
+        <a href="#" class="calc-link" data-calc="swp"><div class="dot" style="background:#7ED957;color:#04281a">&#128176;</div><span>SWP Calculator</span></a>
+        <a href="#" class="calc-link" data-calc="goal"><div class="dot" style="background:#004AAD;color:#fff">&#127919;</div><span>Goal Based Investment</span></a>
+        <a href="#" class="calc-link" data-calc="retirement"><div class="dot" style="background:#7ED957;color:#04281a">&#127983;</div><span>Retirement Planning</span></a>
+        <a href="#" class="calc-link" data-calc="inflation"><div class="dot" style="background:#004AAD;color:#fff">&#128230;</div><span>Inflation Calculator</span></a>
+        <a href="#" class="calc-link" data-calc="tax"><div class="dot" style="background:#7ED957;color:#04281a">&#128202;</div><span>Income Tax Calculator</span></a>
+        <a href="#" class="calc-link" data-calc="fd"><div class="dot" style="background:#004AAD;color:#fff">&#128179;</div><span>FD Calculator</span></a>
+        <a href="#" class="calc-link" data-calc="rd"><div class="dot" style="background:#7ED957;color:#04281a">&#128181;</div><span>RD Calculator</span></a>
+        <a href="#" class="calc-link" data-calc="emi"><div class="dot" style="background:#004AAD;color:#fff">&#127970;</div><span>EMI Calculator</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= BLOGS ======= -->
+  <section class="block blogs" id="blogs">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Blogs</div>
+        <h2>Latest from the <span class="green">Alphagrow Blog</span></h2>
+        <p>Practical, research-based guidance to help you make confident financial decisions.</p>
+      </div>
+      <div class="blog-carousel carousel slide mb-5" id="blogHero" data-bs-ride="carousel" data-bs-interval="5500">
+        <div class="carousel-inner rounded-0 overflow-hidden">
+          <div class="carousel-item active">
+            <div class="ag-tile tile-b">&#128200;</div>
+            <div class="carousel-caption">
+              <span class="badge ag-badge px-3 py-2 mb-2">Featured</span>
+              <h3 class="fs-3 fw-bold">How Systematic Investment Plans (SIPs) Work</h3>
+              <a href="#" class="btn btn-light mt-2 fw-bold">Read Article</a>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="ag-tile tile-g">&#128176;</div>
+            <div class="carousel-caption">
+              <span class="badge ag-badge px-3 py-2 mb-2">Planning</span>
+              <h3 class="fs-3 fw-bold">The Importance of an Emergency Fund</h3>
+              <a href="#" class="btn btn-light mt-2 fw-bold">Read Article</a>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="ag-tile tile-navy">&#127983;</div>
+            <div class="carousel-caption">
+              <span class="badge ag-badge px-3 py-2 mb-2">Retirement</span>
+              <h3 class="fs-3 fw-bold">Starting Early: The Power of Compounding</h3>
+              <a href="#" class="btn btn-light mt-2 fw-bold">Read Article</a>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#blogHero" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+        <button class="carousel-control-next" type="button" data-bs-target="#blogHero" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+      </div>
+      <div class="card-group">
+        <article class="card ag-card rounded-0 border-0 d-flex flex-column h-100">
+          <div class="ag-tile tile-navy">&#128202;</div>
+          <div class="card-body bg-body">
+            <div class="mb-2"><span class="cat">Tax</span> <span class="text-secondary small">· 6 min</span></div>
+            <h5 class="fw-bold">Understanding Equity-Linked Savings Schemes (ELSS)</h5>
+            <p class="mb-3">ELSS mutual funds qualify for tax deduction under Section 80C.</p>
+            <a href="#" class="ag-link">Read &#8594;</a>
+          </div>
+        </article>
+        <article class="card ag-card rounded-0 border-0 d-flex flex-column h-100">
+          <div class="ag-tile tile-b">&#128181;</div>
+          <div class="card-body bg-body">
+            <div class="mb-2"><span class="cat">Investing</span> <span class="text-secondary small">· 5 min</span></div>
+            <h5 class="fw-bold">Fixed Deposits vs. Debt Mutual Funds</h5>
+            <p class="mb-3">FDs offer guaranteed returns and deposit insurance;</p>
+            <a href="#" class="ag-link">Read &#8594;</a>
+          </div>
+        </article>
+        <article class="card ag-card rounded-0 border-0 d-flex flex-column h-100">
+          <div class="ag-tile tile-g">&#128737;</div>
+          <div class="card-body bg-body">
+            <div class="mb-2"><span class="cat">Insurance</span> <span class="text-secondary small">· 5 min</span></div>
+            <h5 class="fw-bold">Life Insurance: Term Plans Explained</h5>
+            <p class="mb-3">A term plan offers large life cover at a lower premium without building cash value.</p>
+            <a href="#" class="ag-link">Read &#8594;</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= WHY CHOOSE ======= -->
+  <section class="block why">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Why Choose Alphagrow?</div>
+        <h2>Your Success is <span class="green">Our Priority</span></h2>
+      </div>
+      <div class="feat-grid">
+        <div class="feat">
+          <div class="icon icon-blue">&#128100;</div>
+          <h3>Personalized Financial Advice</h3>
+          <p>Investment strategies tailored to your financial goals.</p>
+        </div>
+        <div class="feat">
+          <div class="icon icon-green">&#128270;</div>
+          <h3>Trusted Guidance</h3>
+          <p>Professional recommendations backed by research and market insights.</p>
+        </div>
+        <div class="feat">
+          <div class="icon icon-blue">&#127919;</div>
+          <h3>Goal-Based Planning</h3>
+          <p>Every investment aligned with your life milestones.</p>
+        </div>
+        <div class="feat">
+          <div class="icon icon-green">&#128274;</div>
+          <h3>Transparent Process</h3>
+          <p>Clear communication with no hidden complexities.</p>
+        </div>
+        <div class="feat">
+          <div class="icon icon-blue">&#128176;</div>
+          <h3>Long-Term Wealth Creation</h3>
+          <p>Focused on sustainable growth rather than short-term gains.</p>
+        </div>
+        <div class="feat">
+          <div class="icon icon-green">&#128172;</div>
+          <h3>Dedicated Support</h3>
+          <p>Continuous portfolio review and expert assistance whenever you need it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= FAQ ======= -->
+  <section class="block faq">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">FAQ / Quiz</div>
+        <h2>Frequently Asked <span class="green">Questions</span></h2>
+      </div>
+      <div class="accordion faq-accordion" id="faqAccordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqOne" aria-expanded="true" aria-controls="faqOne">
+              Why should I have a financial plan?
+            </button>
+          </h2>
+          <div id="faqOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">A financial plan helps you manage income, savings, investments, and future goals effectively.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqTwo" aria-expanded="false" aria-controls="faqTwo">
+              Which investment option is suitable for me?
+            </button>
+          </h2>
+          <div id="faqTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">The right investment depends on your financial goals, time horizon, and risk appetite.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqThree" aria-expanded="false" aria-controls="faqThree">
+              Do you provide retirement planning?
+            </button>
+          </h2>
+          <div id="faqThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">Yes. We create customized retirement strategies designed to build long-term financial security.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqFour" aria-expanded="false" aria-controls="faqFour">
+              Can you help with insurance selection?
+            </button>
+          </h2>
+          <div id="faqFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">Absolutely. We recommend insurance solutions that provide comprehensive financial protection.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- ======= TESTIMONIALS ======= -->
+  <section class="block testimonials">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Testimonials</div>
+        <h2>What Our <span class="green">Clients Say</span></h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card t-card border-0 h-100">
+            <div class="t-head">
+              <div class="avatar">SR</div>
+              <div><strong>Rahul Sharma</strong><span>Homeowner &amp; Investor</span></div>
+              <span class="verified">&#10003; Verified</span>
+            </div>
+            <div class="t-body">
+              <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <p>&ldquo;Alphagrow helped us organize our finances and invest confidently for our future.&rdquo;</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card t-card border-0 h-100">
+            <div class="t-head">
+              <div class="avatar">PK</div>
+              <div><strong>Priya Kumar</strong><span>Retiring Professional</span></div>
+              <span class="verified">&#10003; Verified</span>
+            </div>
+            <div class="t-body">
+              <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <p>&ldquo;Their retirement planning strategy gave us complete clarity and peace of mind.&rdquo;</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card t-card border-0 h-100">
+            <div class="t-head">
+              <div class="avatar">AM</div>
+              <div><strong>Anand Mehta</strong><span>Small Business Owner</span></div>
+              <span class="verified">&#10003; Verified</span>
+            </div>
+            <div class="t-body">
+              <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <p>&ldquo;Professional, transparent, and always available to guide us.&rdquo;</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card t-card border-0 h-100">
+            <div class="t-head">
+              <div class="avatar">SG</div>
+              <div><strong>Sneha Gupta</strong><span>Young Professional</span></div>
+              <span class="verified">&#10003; Verified</span>
+            </div>
+            <div class="t-body">
+              <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <p>&ldquo;Clear guidance and a strategy perfectly matched to our goals.&rdquo;</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card t-card border-0 h-100">
+            <div class="t-head">
+              <div class="avatar">VR</div>
+              <div><strong>Vikram Rao</strong><span>Startup Founder</span></div>
+              <span class="verified">&#10003; Verified</span>
+            </div>
+            <div class="t-body">
+              <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <p>&ldquo;Simplified complex decisions and kept us on track every quarter.&rdquo;</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card t-card border-0 h-100">
+            <div class="t-head">
+              <div class="avatar">NJ</div>
+              <div><strong>Neha Joshi</strong><span>Doctor</span></div>
+              <span class="verified">&#10003; Verified</span>
+            </div>
+            <div class="t-body">
+              <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <p>&ldquo;Truly personalized advice that respected my risk appetite.&rdquo;</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= CONTACT ======= -->
+  <section class="block contact" id="contact">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Contact Us</div>
+        <h2>Get in <span class="green">Touch</span></h2>
+        <p>Have a question or ready to start? Reach out and our advisors will get back to you shortly.</p>
+      </div>
+      <div class="row g-4 align-items-stretch">
+        <div class="col-12 col-lg-5">
+          <div class="info-panel">
+            <h3>Talk to Our Advisors</h3>
+            <p>We're here to guide you at every step of your financial journey.</p>
+            <div class="info-item"><div class="ic">&#9742;</div><div><strong>Phone</strong><a href="tel:+910000000000">+91 00000 00000</a></div></div>
+            <div class="info-item"><div class="ic">&#9993;</div><div><strong>Email</strong><a href="mailto:hello@alphagrow.com">hello@alphagrow.com</a></div></div>
+            <div class="info-item"><div class="ic">&#128205;</div><div><strong>Office</strong><span>Mumbai, India</span></div></div>
+            <div class="info-item"><div class="ic">&#128336;</div><div><strong>Working Hours</strong><span>Mon - Sat · 9:00 AM - 7:00 PM</span></div></div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-7">
+          <div class="form-panel">
+            <form id="contact-form" class="row g-3">
+              <div class="col-12 col-md-6"><label class="form-label">Full Name</label><input type="text" class="form-control" name="name" placeholder="Enter your name" required></div>
+              <div class="col-12 col-md-6"><label class="form-label">Phone Number</label><input type="tel" class="form-control" name="phone" placeholder="+91 XXXXX XXXXX" required></div>
+              <div class="col-12"><label class="form-label">Email</label><input type="email" class="form-control" name="email" placeholder="you@example.com" required></div>
+              <div class="col-12"><label class="form-label">Subject</label><select class="form-select rounded-0 border-secondary-subtle" name="subject"><option selected>General Inquiry</option><option>Investment Planning</option><option>Retirement Planning</option><option>Insurance</option></select></div>
+              <div class="col-12"><label class="form-label">Message</label><textarea class="form-control" name="message" rows="4" placeholder="How can we help you?" required></textarea></div>
+              <div class="col-12"><button type="submit" class="btn btn-submit">Send Message</button></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= FOOTER ======= -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+<a href="#" class="brand"><img class="brand-logo" src="images/logo.png" alt="Alpha Grow logo" width="170" height="44"></a>
+          <p>Your trusted partner in wealth creation and financial security. Personalized guidance for every goal.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+<a href="#calculators">Calculator</a>
+          <a href="#blogs">Blogs</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="#services">Personal Financial Planning</a>
+          <a href="#services">Mutual Fund Investment</a>
+          <a href="#services">Child Education Investment</a>
+          <a href="#services">Goal Based Investment</a>
+          <a href="#services">Retirement Planning</a>
+          <a href="#services">Health Insurance Plan</a>
+          <a href="#services">Life Insurance Plan</a>
+          <a href="#services">Emergency Fund</a>
+          <a href="#services">Bonds</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="tel:+910000000000">+91 00000 00000</a>
+          <a href="mailto:hello@alphagrow.com">hello@alphagrow.com</a>
+          <a href="#">Mumbai, India</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&#169; 2026 Alphagrow. All rights reserved.</span>
+        <span>Financial security starts here.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var amount = document.getElementById('sip-amount');
+      var rate = document.getElementById('sip-rate');
+      var years = document.getElementById('sip-years');
+      var out = document.getElementById('sip-out');
+      if (!amount || !rate || !years || !out) return;
+      function calc() {
+        var mi = parseFloat(amount.value) || 0;
+        var r = (parseFloat(rate.value) || 0) / 12 / 100;
+        var n = (parseFloat(years.value) || 0) * 12;
+        var fv = mi * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
+        out.textContent = '\u20B9 ' + Math.round(fv).toLocaleString('en-IN');
+      }
+      [amount, rate, years].forEach(function (el) { el.addEventListener('input', calc); });
+      calc();
+    })();
+
+    (function () {
+      var calcs = {
+        sip: { icon: '&#128200;', title: 'SIP Calculator', desc: 'See how your monthly investments can grow over time.', label: 'Maturity Value', fields: ['Monthly investment (&#8377;)', 'Expected return (%)', 'Years'] },
+        lumpsum: { icon: '&#128181;', title: 'Lumpsum Calculator', desc: 'Project the growth of a one-time investment over time.', label: 'Future Value', fields: ['Principal amount (&#8377;)', 'Expected return (%)', 'Years'] },
+        swp: { icon: '&#128176;', title: 'SWP Calculator', desc: 'Plan regular withdrawals from your investment corpus.', label: 'Remaining Corpus', fields: ['Corpus amount (&#8377;)', 'Monthly withdrawal (&#8377;)', 'Withdrawal years'] },
+        goal: { icon: '&#127919;', title: 'Goal Based Investment', desc: 'Calculate the monthly amount needed to reach your financial goal.', label: 'Required Monthly Amount', fields: ['Goal amount (&#8377;)', 'Expected return (%)', 'Years'] },
+        retirement: { icon: '&#127983;', title: 'Retirement Planning', desc: 'Find out how much to save today for a comfortable retirement.', label: 'Monthly Savings Needed', fields: ['Target corpus (&#8377;)', 'Expected return (%)', 'Years to retire'] },
+        inflation: { icon: '&#128230;', title: 'Inflation Calculator', desc: 'Understand the future cost of today\'s expenses over time.', label: 'Future Cost', fields: ['Current cost (&#8377;)', 'Inflation rate (%)', 'Years'] },
+        tax: { icon: '&#128202;', title: 'Income Tax Calculator', desc: 'Compute your tax liability under the current tax regime.', label: 'Estimated Tax', fields: ['Annual income (&#8377;)', 'Deductions (&#8377;)', 'Tax regime %'] },
+        fd: { icon: '&#128179;', title: 'FD Calculator', desc: 'Estimate returns on your fixed deposit investment.', label: 'Maturity Amount', fields: ['Deposit amount (&#8377;)', 'Interest rate (%)', 'Tenure (years)'] },
+        rd: { icon: '&#128181;', title: 'RD Calculator', desc: 'Project the maturity value of recurring monthly deposits.', label: 'Maturity Amount', fields: ['Monthly deposit (&#8377;)', 'Interest rate (%)', 'Tenure (years)'] },
+        emi: { icon: '&#127970;', title: 'EMI Calculator', desc: 'Plan your loan repayments with accurate monthly EMI estimates.', label: 'Monthly EMI', fields: ['Loan amount (&#8377;)', 'Interest rate (%)', 'Loan tenure (years)'] }
+      };
+      var icon = document.getElementById('cf-icon');
+      var title = document.getElementById('cf-title');
+      var desc = document.getElementById('cf-desc');
+      var form = document.getElementById('cf-form');
+      var links = document.querySelectorAll('.calc-link');
+      if (!icon || !title || !desc || !form) return;
+      function render(key) {
+        var c = calcs[key] || calcs.sip;
+        icon.innerHTML = c.icon;
+        title.textContent = c.title;
+        desc.textContent = c.desc;
+        var html = '';
+        c.fields.forEach(function (f, i) {
+          html += '<input type="number" class="cf-input" data-idx="' + i + '" placeholder="' + f + '" value="' + (i === 0 ? '5000' : i === 1 ? '12' : '10') + '">';
+        });
+        html += '<div class="result">' + c.label + '<strong class="cf-result">&#8377; 0</strong></div>';
+        form.innerHTML = html;
+        form.querySelectorAll('.cf-input').forEach(function (el) {
+          el.addEventListener('input', updateResult);
+        });
+        updateResult();
+      }
+      function updateResult() {
+        var result = form.querySelector('.cf-result');
+        if (!result) return;
+        var a = parseFloat(form.querySelector('[data-idx="0"]').value) || 0;
+        var b = parseFloat(form.querySelector('[data-idx="1"]').value) || 0;
+        var c = parseFloat(form.querySelector('[data-idx="2"]').value) || 0;
+        var v = a * Math.pow(1 + b / 100, c);
+        result.innerHTML = '&#8377; ' + Math.round(v).toLocaleString('en-IN');
+      }
+      links.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          render(link.getAttribute('data-calc'));
+          links.forEach(function (l) { l.classList.remove('active'); });
+          link.classList.add('active');
+          var feat = document.getElementById('calc-featured');
+          if (feat) feat.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+      });
+    })();
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
