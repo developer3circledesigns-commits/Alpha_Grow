@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 <title>Alphagrow &mdash; Wealth Creation & Financial Security</title>
 <style>
@@ -21,6 +22,7 @@
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
+  section[id] { scroll-margin-top: 80px; }
   body { font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); background: #ffffff; line-height: 1.6; overflow-x: hidden; }
   a { text-decoration: none; }
   img { display: block; max-width: 100%; }
@@ -44,7 +46,7 @@
   .hero::before { content: ''; position: absolute; inset: 0;
     background:
       linear-gradient(rgba(10,61,98,.88), rgba(18,140,124,.82)),
-      url('images/hero_img.jpg') center/cover no-repeat; }
+      url('images/hero_img-opt.jpg') center/cover no-repeat; }
   .hero .inner { position: relative; z-index: 1; max-width: 820px; margin: 0; }
   .badge { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(126,217,87,.5); color: var(--green); padding: 8px 16px; border-radius: 999px; font-size: 14px; font-weight: 600; margin-bottom: 26px; }
   .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
@@ -257,7 +259,9 @@
     .footer-grid { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 640px) {
-    .nav-links { display: none; }
+    .nav-links { display: none; position: absolute; top: 70px; left: 0; right: 0; flex-direction: column; gap: 0; background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.12); padding: 12px 24px; }
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: 12px 0; border-bottom: 1px solid var(--line); }
     .menu-btn { display: block; }
     .feat-grid, .calc-grid, .steps, .steps-4, .price-grid, .stats-grid { grid-template-columns: 1fr; }
     .kpis { grid-template-columns: 1fr; }
@@ -317,7 +321,7 @@
           </ul>
         </div>
         <div class="about-media">
-          <img src="images/about.png" alt="Financial advisor guiding wealth planning" width="768" height="460">
+          <img loading="lazy" src="images/about-opt.jpg" alt="Financial advisor guiding wealth planning" width="768" height="460">
         </div>
       </div>
     </div>
@@ -332,7 +336,7 @@
       </div>
       <div class="svc-grid">
           <div class="svc-card">
-            <img class="svc-img" src="images/our_services/stock-market-exchange-economics-investment-graph.jpg" alt="Personal Financial Planning">
+            <img loading="lazy" class="svc-img" src="images/our_services/stock-market-exchange-economics-investment-graph-opt.jpg" alt="Personal Financial Planning">
             <div class="svc-body">
               <h3>Personal Financial Planning</h3>
               <p>Create a personalized roadmap to achieve your short-term and long-term financial goals with structured planning and expert advice.</p>
@@ -340,7 +344,7 @@
             </div>
           </div>
           <div class="svc-card">
-            <img class="svc-img" src="images/our_services/hand-adding-coins-stack-covered-dirt-plants.jpg" alt="Mutual Fund Investment">
+            <img loading="lazy" class="svc-img" src="images/our_services/hand-adding-coins-stack-covered-dirt-plants-opt.jpg" alt="Mutual Fund Investment">
             <div class="svc-body">
               <h3>Mutual Fund Investment</h3>
               <p>Grow your wealth through professionally managed mutual fund investments aligned with your risk profile and financial objectives.</p>
@@ -348,7 +352,7 @@
             </div>
           </div>
           <div class="svc-card">
-            <img class="svc-img" src="images/our_services/putting-money-coins-saving-glass-bottle-concept-investment-mutual-fund-finance-business-placed-textbook-content-money-saving-education.jpg" alt="Child Education Investment">
+            <img loading="lazy" class="svc-img" src="images/our_services/putting-money-coins-saving-glass-bottle-concept-investment-mutual-fund-finance-business-placed-textbook-content-money-saving-education-opt.jpg" alt="Child Education Investment">
             <div class="svc-body">
               <h3>Child Education Investment</h3>
               <p>Build a dedicated education fund that secures your child's future with disciplined, goal-oriented investing.</p>
@@ -356,7 +360,7 @@
             </div>
           </div>
           <div class="svc-card">
-            <img class="svc-img" src="images/our_services/pointing-out-goals.jpg" alt="Goal Based Investment">
+            <img loading="lazy" class="svc-img" src="images/our_services/pointing-out-goals-opt.jpg" alt="Goal Based Investment">
             <div class="svc-body">
               <h3>Goal Based Investment</h3>
               <p>Every investment aligned with your life milestones &mdash; from buying a home to starting a business.</p>
@@ -364,7 +368,7 @@
             </div>
           </div>
           <div class="svc-card">
-            <img class="svc-img" src="images/our_services/retirement-plan-financial-investment-application-form-concept.jpg" alt="Retirement Planning">
+            <img loading="lazy" class="svc-img" src="images/our_services/retirement-plan-financial-investment-application-form-concept-opt.jpg" alt="Retirement Planning">
             <div class="svc-body">
               <h3>Retirement Planning</h3>
               <p>Build a secure retirement corpus with strategies designed to provide financial independence and peace of mind after retirement.</p>
@@ -372,7 +376,7 @@
             </div>
           </div>
           <div class="svc-card">
-            <img class="svc-img" src="images/our_services/family-insurance-reimbursement-protection-concept.jpg" alt="Health Insurance Plan">
+            <img loading="lazy" class="svc-img" src="images/our_services/family-insurance-reimbursement-protection-concept-opt.jpg" alt="Health Insurance Plan">
             <div class="svc-body">
               <h3>Health Insurance Plan</h3>
               <p>Protect your family from medical emergencies with comprehensive health insurance plans tailored to your needs.</p>
@@ -380,7 +384,7 @@
             </div>
           </div>
           <div class="svc-card">
-            <img class="svc-img" src="images/our_services/life-insurance-protection-beneficiary-safeguard-concept.jpg" alt="Life Insurance Plan">
+            <img loading="lazy" class="svc-img" src="images/our_services/life-insurance-protection-beneficiary-safeguard-concept-opt.jpg" alt="Life Insurance Plan">
             <div class="svc-body">
               <h3>Life Insurance Plan</h3>
               <p>Secure your loved ones' financial future with carefully selected life insurance plans that offer complete protection.</p>
@@ -388,7 +392,7 @@
             </div>
           </div>
           <div class="svc-card">
-            <img class="svc-img" src="images/our_services/hand-holding-coin-bank-symbolizing-wealth-growth-generated-by-ai.jpg" alt="Emergency Fund">
+            <img loading="lazy" class="svc-img" src="images/our_services/hand-holding-coin-bank-symbolizing-wealth-growth-generated-by-ai-opt.jpg" alt="Emergency Fund">
             <div class="svc-body">
               <h3>Emergency Fund</h3>
               <p>Build a safety net that keeps you prepared for unexpected expenses and protects your long-term financial goals.</p>
@@ -396,7 +400,7 @@
             </div>
           </div>
           <div class="svc-card">
-            <img class="svc-img" src="images/our_services/bond-investment-product.jpg" alt="Bonds">
+            <img loading="lazy" class="svc-img" src="images/our_services/bond-investment-product-opt.jpg" alt="Bonds">
             <div class="svc-body">
               <h3>Bonds</h3>
               <p>Diversify your portfolio with government and corporate bonds that provide reliable income and long-term financial stability.</p>
@@ -762,6 +766,20 @@
     })();
 
     (function () {
+      var btn = document.querySelector('.menu-btn');
+      var nav = document.querySelector('.nav-links');
+      if (!btn || !nav) return;
+      btn.addEventListener('click', function () {
+        nav.classList.toggle('open');
+      });
+      nav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          nav.classList.remove('open');
+        });
+      });
+    })();
+
+    (function () {
       var calcs = {
         sip: { icon: '<i class="bi bi-graph-up-arrow"></i>', title: 'SIP Calculator', desc: 'See how your monthly investments can grow over time.', label: 'Maturity Value', fields: ['Monthly investment (&#8377;)', 'Expected return (%)', 'Years'] },
         lumpsum: { icon: '<i class="bi bi-cash-stack"></i>', title: 'Lumpsum Calculator', desc: 'Project the growth of a one-time investment over time.', label: 'Future Value', fields: ['Principal amount (&#8377;)', 'Expected return (%)', 'Years'] },
@@ -812,11 +830,14 @@
           links.forEach(function (l) { l.classList.remove('active'); });
           link.classList.add('active');
           var feat = document.getElementById('calc-featured');
-          if (feat) feat.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          if (feat) {
+            var top = feat.getBoundingClientRect().top + window.pageYOffset - 90;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+          }
         });
       });
     })();
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
