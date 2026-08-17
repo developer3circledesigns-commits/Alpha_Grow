@@ -110,12 +110,16 @@
   .calcs { background: #ffffff; }
   .calc-featured { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; background: var(--blue); color: #fff; padding: 44px clamp(28px, 5vw, 56px); margin-bottom: 40px; position: relative; overflow: hidden; }
   .calc-featured::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(55% 70% at 85% 15%, rgba(126,217,87,.2), transparent 60%); }
-  .calc-featured .cf-left, .calc-featured .cf-right { position: relative; z-index: 1; }
+  .calc-featured .cf-left, .calc-featured .cf-right { position: relative; z-index: 1; min-width: 0; }
   .calc-featured .icon { width: 60px; height: 60px; border-radius: 0; background: rgba(126,217,87,.2); color: var(--green); display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 18px; }
   .calc-featured h3 { font-size: 1.6rem; margin-bottom: 10px; color: #fff; }
   .calc-featured p { color: rgba(255,255,255,.8); font-size: 15px; line-height: 1.6; }
   .calc-featured .open { display: inline-block; margin-top: 18px; background: var(--green); color: #04281a; padding: 12px 28px; font-weight: 800; text-decoration: none; border-radius: 0; }
-  .calc-quick input { width: 100%; padding: 13px 16px; margin-bottom: 12px; border: 0; border-radius: 0; font-size: 15px; }
+  .calc-quick input { width: 100%; min-width: 0; max-width: 100%; box-sizing: border-box; padding: 13px 16px; margin-bottom: 14px; border: 0; border-radius: 0; font-size: 15px; color: #04281a; }
+  .calc-quick label { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: rgba(255,255,255,.75); margin-bottom: 6px; }
+  .calc-featured .cf-details { list-style: none; margin-top: 16px; padding: 0; }
+  .calc-featured .cf-details li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.55; color: rgba(255,255,255,.85); margin-bottom: 8px; }
+  .calc-featured .cf-details li i { color: var(--green); font-size: 16px; line-height: 1.4; }
   .calc-quick .result { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); padding: 14px 16px; font-size: 14px; }
   .calc-quick .result strong { color: var(--green); font-size: 20px; display: block; margin-top: 4px; }
   .calc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -125,6 +129,11 @@
   .calc-link span { font-size: 14px; font-weight: 600; }
   .calc-link.active { border-color: var(--blue); box-shadow: 0 0 0 2px rgba(0,74,173,.15); }
   @media (max-width: 960px) { .calc-featured { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) {
+    .calc-quick input { padding: 11px 12px; font-size: 14px; }
+    .calc-quick label { font-size: 11px; }
+    .calc-featured .open { width: 100%; text-align: center; }
+  }
 
   .feat p { color: var(--muted); font-size: 15px; }
 
@@ -424,11 +433,19 @@
           <div class="icon" id="cf-icon"><i class="bi bi-graph-up-arrow"></i></div>
           <h3 id="cf-title">Start with SIP Calculator</h3>
           <p id="cf-desc">See how your monthly investments can grow over time with our most popular calculator.</p>
+          <ul class="cf-details" id="cf-details">
+            <li><i class="bi bi-check2"></i> Invest a fixed amount monthly to build wealth.</li>
+            <li><i class="bi bi-check2"></i> Returns compound over your chosen time period.</li>
+            <li><i class="bi bi-check2"></i> Get an instant maturity value estimate.</li>
+          </ul>
           <a href="#" class="open">Open Full Calculator</a>
         </div>
         <div class="cf-right calc-quick" id="cf-form">
+          <label for="sip-amount">Monthly Investment</label>
           <input type="number" id="sip-amount" placeholder="Monthly investment (&#8377;)" value="5000">
+          <label for="sip-rate">Expected Return</label>
           <input type="number" id="sip-rate" placeholder="Expected return (%)" value="12">
+          <label for="sip-years">Investment Period</label>
           <input type="number" id="sip-years" placeholder="Years" value="10">
           <div class="result">Maturity Value<strong id="sip-out">&#8377; --</strong></div>
         </div>
@@ -781,20 +798,151 @@
 
     (function () {
       var calcs = {
-        sip: { icon: '<i class="bi bi-graph-up-arrow"></i>', title: 'SIP Calculator', desc: 'See how your monthly investments can grow over time.', label: 'Maturity Value', fields: ['Monthly investment (&#8377;)', 'Expected return (%)', 'Years'] },
-        lumpsum: { icon: '<i class="bi bi-cash-stack"></i>', title: 'Lumpsum Calculator', desc: 'Project the growth of a one-time investment over time.', label: 'Future Value', fields: ['Principal amount (&#8377;)', 'Expected return (%)', 'Years'] },
-        swp: { icon: '<i class="bi bi-arrow-down-circle"></i>', title: 'SWP Calculator', desc: 'Plan regular withdrawals from your investment corpus.', label: 'Remaining Corpus', fields: ['Corpus amount (&#8377;)', 'Monthly withdrawal (&#8377;)', 'Withdrawal years'] },
-        goal: { icon: '<i class="bi bi-bullseye"></i>', title: 'Goal Based Investment', desc: 'Calculate the monthly amount needed to reach your financial goal.', label: 'Required Monthly Amount', fields: ['Goal amount (&#8377;)', 'Expected return (%)', 'Years'] },
-        retirement: { icon: '<i class="bi bi-bank"></i>', title: 'Retirement Planning', desc: 'Find out how much to save today for a comfortable retirement.', label: 'Monthly Savings Needed', fields: ['Target corpus (&#8377;)', 'Expected return (%)', 'Years to retire'] },
-        inflation: { icon: '<i class="bi bi-receipt"></i>', title: 'Inflation Calculator', desc: 'Understand the future cost of today\'s expenses over time.', label: 'Future Cost', fields: ['Current cost (&#8377;)', 'Inflation rate (%)', 'Years'] },
-        tax: { icon: '<i class="bi bi-graph-up-arrow"></i>', title: 'Income Tax Calculator', desc: 'Compute your tax liability under the current tax regime.', label: 'Estimated Tax', fields: ['Annual income (&#8377;)', 'Deductions (&#8377;)', 'Tax regime %'] },
-        fd: { icon: '<i class="bi bi-piggy-bank"></i>', title: 'FD Calculator', desc: 'Estimate returns on your fixed deposit investment.', label: 'Maturity Amount', fields: ['Deposit amount (&#8377;)', 'Interest rate (%)', 'Tenure (years)'] },
-        rd: { icon: '<i class="bi bi-currency-rupee"></i>', title: 'RD Calculator', desc: 'Project the maturity value of recurring monthly deposits.', label: 'Maturity Amount', fields: ['Monthly deposit (&#8377;)', 'Interest rate (%)', 'Tenure (years)'] },
-        emi: { icon: '<i class="bi bi-house-door"></i>', title: 'EMI Calculator', desc: 'Plan your loan repayments with accurate monthly EMI estimates.', label: 'Monthly EMI', fields: ['Loan amount (&#8377;)', 'Interest rate (%)', 'Loan tenure (years)'] }
+        sip: {
+          icon: '<i class="bi bi-graph-up-arrow"></i>', title: 'SIP Calculator', label: 'Maturity Value',
+          desc: 'See how your monthly investments can grow over time.',
+          details: [
+            'Invest a fixed amount every month to build long-term wealth.',
+            'Returns compound annually over your chosen time period.',
+            'Get an instant estimate of your total maturity value.'
+          ],
+          fields: [
+            { label: 'Monthly Investment', placeholder: 'Monthly investment (&#8377;)', def: 5000 },
+            { label: 'Expected Return', placeholder: 'Expected return (%)', def: 12 },
+            { label: 'Investment Period', placeholder: 'Years', def: 10 }
+          ]
+        },
+        lumpsum: {
+          icon: '<i class="bi bi-cash-stack"></i>', title: 'Lumpsum Calculator', label: 'Future Value',
+          desc: 'Project the growth of a one-time investment over time.',
+          details: [
+            'Grow a single large investment without monthly deposits.',
+            'Higher expected returns increase your final corpus.',
+            'See the future value of your principal at maturity.'
+          ],
+          fields: [
+            { label: 'Principal Amount', placeholder: 'Principal amount (&#8377;)', def: 100000 },
+            { label: 'Expected Return', placeholder: 'Expected return (%)', def: 12 },
+            { label: 'Investment Period', placeholder: 'Years', def: 10 }
+          ]
+        },
+        swp: {
+          icon: '<i class="bi bi-arrow-down-circle"></i>', title: 'SWP Calculator', label: 'Remaining Corpus',
+          desc: 'Plan regular withdrawals from your investment corpus.',
+          details: [
+            'Withdraw a fixed amount from your corpus every month.',
+            'Understand how long your savings can last.',
+            'Estimate the corpus remaining after your withdrawal period.'
+          ],
+          fields: [
+            { label: 'Corpus Amount', placeholder: 'Corpus amount (&#8377;)', def: 5000000 },
+            { label: 'Monthly Withdrawal', placeholder: 'Monthly withdrawal (&#8377;)', def: 25000 },
+            { label: 'Withdrawal Period', placeholder: 'Withdrawal years', def: 10 }
+          ]
+        },
+        goal: {
+          icon: '<i class="bi bi-bullseye"></i>', title: 'Goal Based Investment', label: 'Required Monthly Amount',
+          desc: 'Calculate the monthly amount needed to reach your financial goal.',
+          details: [
+            'Set a target amount for any future goal.',
+            'Estimate the SIP needed to achieve that goal.',
+            'Start investing today to reach your target on time.'
+          ],
+          fields: [
+            { label: 'Goal Amount', placeholder: 'Goal amount (&#8377;)', def: 1000000 },
+            { label: 'Expected Return', placeholder: 'Expected return (%)', def: 12 },
+            { label: 'Time Horizon', placeholder: 'Years', def: 10 }
+          ]
+        },
+        retirement: {
+          icon: '<i class="bi bi-bank"></i>', title: 'Retirement Planning', label: 'Monthly Savings Needed',
+          desc: 'Find out how much to save today for a comfortable retirement.',
+          details: [
+            'Build the corpus you need for a stress-free retirement.',
+            'Start early to keep your monthly savings affordable.',
+            'Estimate your required monthly savings instantly.'
+          ],
+          fields: [
+            { label: 'Target Corpus', placeholder: 'Target corpus (&#8377;)', def: 20000000 },
+            { label: 'Expected Return', placeholder: 'Expected return (%)', def: 12 },
+            { label: 'Years to Retire', placeholder: 'Years to retire', def: 20 }
+          ]
+        },
+        inflation: {
+          icon: '<i class="bi bi-receipt"></i>', title: 'Inflation Calculator', label: 'Future Cost',
+          desc: 'Understand the future cost of today\'s expenses over time.',
+          details: [
+            'See how much your current expenses will cost later.',
+            'Plan for rising prices across your goals.',
+            'Know the real future value of your money.'
+          ],
+          fields: [
+            { label: 'Current Cost', placeholder: 'Current cost (&#8377;)', def: 50000 },
+            { label: 'Inflation Rate', placeholder: 'Inflation rate (%)', def: 6 },
+            { label: 'Time Period', placeholder: 'Years', def: 10 }
+          ]
+        },
+        tax: {
+          icon: '<i class="bi bi-graph-up-arrow"></i>', title: 'Income Tax Calculator', label: 'Estimated Tax',
+          desc: 'Compute your tax liability under the current tax regime.',
+          details: [
+            'Enter your income to estimate your annual tax.',
+            'Include deductions to lower your tax burden.',
+            'Get a quick estimate of your total tax due.'
+          ],
+          fields: [
+            { label: 'Annual Income', placeholder: 'Annual income (&#8377;)', def: 800000 },
+            { label: 'Deductions', placeholder: 'Deductions (&#8377;)', def: 150000 },
+            { label: 'Tax Regime Rate', placeholder: 'Tax regime %', def: 20 }
+          ]
+        },
+        fd: {
+          icon: '<i class="bi bi-piggy-bank"></i>', title: 'FD Calculator', label: 'Maturity Amount',
+          desc: 'Estimate returns on your fixed deposit investment.',
+          details: [
+            'Earn guaranteed interest on a one-time deposit.',
+            'Longer tenures compound your returns higher.',
+            'Estimate your final maturity amount instantly.'
+          ],
+          fields: [
+            { label: 'Deposit Amount', placeholder: 'Deposit amount (&#8377;)', def: 100000 },
+            { label: 'Interest Rate', placeholder: 'Interest rate (%)', def: 7 },
+            { label: 'Deposit Tenure', placeholder: 'Tenure (years)', def: 5 }
+          ]
+        },
+        rd: {
+          icon: '<i class="bi bi-currency-rupee"></i>', title: 'RD Calculator', label: 'Maturity Amount',
+          desc: 'Project the maturity value of recurring monthly deposits.',
+          details: [
+            'Save a fixed amount every month with discipline.',
+            'Interest compounds quarterly on your deposits.',
+            'Estimate the total amount at maturity.'
+          ],
+          fields: [
+            { label: 'Monthly Deposit', placeholder: 'Monthly deposit (&#8377;)', def: 5000 },
+            { label: 'Interest Rate', placeholder: 'Interest rate (%)', def: 7 },
+            { label: 'Deposit Tenure', placeholder: 'Tenure (years)', def: 5 }
+          ]
+        },
+        emi: {
+          icon: '<i class="bi bi-house-door"></i>', title: 'EMI Calculator', label: 'Monthly EMI',
+          desc: 'Plan your loan repayments with accurate monthly EMI estimates.',
+          details: [
+            'Plan home, car, or personal loan repayments.',
+            'See your fixed monthly payment instantly.',
+            'Compare tenures to pick the right loan plan.'
+          ],
+          fields: [
+            { label: 'Loan Amount', placeholder: 'Loan amount (&#8377;)', def: 5000000 },
+            { label: 'Interest Rate', placeholder: 'Interest rate (%)', def: 9 },
+            { label: 'Loan Tenure', placeholder: 'Loan tenure (years)', def: 20 }
+          ]
+        }
       };
       var icon = document.getElementById('cf-icon');
       var title = document.getElementById('cf-title');
       var desc = document.getElementById('cf-desc');
+      var detailsEl = document.getElementById('cf-details');
       var form = document.getElementById('cf-form');
       var links = document.querySelectorAll('.calc-link');
       if (!icon || !title || !desc || !form) return;
@@ -803,9 +951,13 @@
         icon.innerHTML = c.icon;
         title.textContent = c.title;
         desc.textContent = c.desc;
+        detailsEl.innerHTML = c.details.map(function (d) {
+          return '<li><i class="bi bi-check2"></i>' + d + '</li>';
+        }).join('');
         var html = '';
         c.fields.forEach(function (f, i) {
-          html += '<input type="number" class="cf-input" data-idx="' + i + '" placeholder="' + f + '" value="' + (i === 0 ? '5000' : i === 1 ? '12' : '10') + '">';
+          html += '<label for="cf-' + key + '-' + i + '">' + f.label + '</label>';
+          html += '<input type="number" id="cf-' + key + '-' + i + '" class="cf-input" data-idx="' + i + '" placeholder="' + f.placeholder + '" value="' + f.def + '">';
         });
         html += '<div class="result">' + c.label + '<strong class="cf-result">&#8377; 0</strong></div>';
         form.innerHTML = html;
