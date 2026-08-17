@@ -120,8 +120,8 @@
   .calc-featured .cf-details { list-style: none; margin-top: 16px; padding: 0; }
   .calc-featured .cf-details li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.55; color: rgba(255,255,255,.85); margin-bottom: 8px; }
   .calc-featured .cf-details li i { color: var(--green); font-size: 16px; line-height: 1.4; }
-  .calc-quick .result { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); padding: 14px 16px; font-size: 14px; }
-  .calc-quick .result strong { color: var(--green); font-size: 20px; display: block; margin-top: 4px; }
+  .calc-quick .result { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); padding: 14px 16px; font-size: 14px; overflow: hidden; }
+  .calc-quick .result strong { color: var(--green); font-size: 20px; display: block; margin-top: 4px; word-break: break-all; line-height: 1.3; }
   .calc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .calc-link { background: #fff; border: 1px solid var(--line); border-radius: 0; padding: 16px 20px; display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); transition: transform .15s ease, box-shadow .15s ease; }
   .calc-link:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0,74,173,.12); }
@@ -766,23 +766,6 @@
 
   <script>
     (function () {
-      var amount = document.getElementById('sip-amount');
-      var rate = document.getElementById('sip-rate');
-      var years = document.getElementById('sip-years');
-      var out = document.getElementById('sip-out');
-      if (!amount || !rate || !years || !out) return;
-      function calc() {
-        var mi = parseFloat(amount.value) || 0;
-        var r = (parseFloat(rate.value) || 0) / 12 / 100;
-        var n = (parseFloat(years.value) || 0) * 12;
-        var fv = mi * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
-        out.textContent = '\u20B9 ' + Math.round(fv).toLocaleString('en-IN');
-      }
-      [amount, rate, years].forEach(function (el) { el.addEventListener('input', calc); });
-      calc();
-    })();
-
-    (function () {
       var btn = document.querySelector('.menu-btn');
       var nav = document.querySelector('.nav-links');
       if (!btn || !nav) return;
@@ -836,6 +819,7 @@
           ],
           fields: [
             { label: 'Corpus Amount', placeholder: 'Corpus amount (&#8377;)', def: 5000000 },
+            { label: 'Expected Return', placeholder: 'Expected return (%)', def: 8 },
             { label: 'Monthly Withdrawal', placeholder: 'Monthly withdrawal (&#8377;)', def: 25000 },
             { label: 'Withdrawal Period', placeholder: 'Withdrawal years', def: 10 }
           ]
@@ -945,9 +929,11 @@
       var detailsEl = document.getElementById('cf-details');
       var form = document.getElementById('cf-form');
       var links = document.querySelectorAll('.calc-link');
+      var current = 'sip';
       if (!icon || !title || !desc || !form) return;
       function render(key) {
         var c = calcs[key] || calcs.sip;
+        current = key;
         icon.innerHTML = c.icon;
         title.textContent = c.title;
         desc.textContent = c.desc;
@@ -969,10 +955,68 @@
       function updateResult() {
         var result = form.querySelector('.cf-result');
         if (!result) return;
-        var a = parseFloat(form.querySelector('[data-idx="0"]').value) || 0;
-        var b = parseFloat(form.querySelector('[data-idx="1"]').value) || 0;
-        var c = parseFloat(form.querySelector('[data-idx="2"]').value) || 0;
-        var v = a * Math.pow(1 + b / 100, c);
+        var vals = [];
+        form.querySelectorAll('.cf-input').forEach(function (el) {
+          vals.push(parseFloat(el.value) || 0);
+        });
+        var a = vals[0] || 0;
+        var b = vals[1] || 0;
+        var c = vals[2] || 0;
+        var d = vals[3] || 0;
+        var calcType = current;
+        var v = 0;
+        
+        switch(calcType) {
+          case 'sip':
+            var r = b / 12 / 100;
+            var n = c * 12;
+            v = r > 0 ? a * ((Math.pow(1 + r, n) - 1) / r) * (1 + r) : a * n;
+            break;
+          case 'lumpsum':
+            v = a * Math.pow(1 + b / 100, c);
+            break;
+          case 'swp':
+            var r = b / 12 / 100;
+            var n = c * 12;
+            v = a * Math.pow(1 + r, n) - d * ((Math.pow(1 + r, n) - 1) / r);
+            if (v < 0) v = 0;
+            break;
+          case 'goal':
+            var r = b / 12 / 100;
+            var n = c * 12;
+            v = r > 0 ? a * r / (Math.pow(1 + r, n) - 1) * (1 + r) : a / n;
+            break;
+          case 'retirement':
+            var r = b / 12 / 100;
+            var n = c * 12;
+            v = r > 0 ? a * r / (Math.pow(1 + r, n) - 1) * (1 + r) : a / n;
+            break;
+          case 'inflation':
+            v = a * Math.pow(1 + b / 100, c);
+            break;
+          case 'tax':
+            var taxableIncome = Math.max(0, a - b);
+            v = taxableIncome * (c / 100);
+            break;
+          case 'fd':
+            var r = b / 4 / 100;
+            var n = c * 4;
+            v = a * Math.pow(1 + r, n);
+            break;
+          case 'rd':
+            var r = b / 12 / 100;
+            var n = c * 12;
+            v = a * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
+            break;
+          case 'emi':
+            var r = b / 12 / 100;
+            var n = c * 12;
+            v = r > 0 ? a * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1) : a / n;
+            break;
+          default:
+            v = a * Math.pow(1 + b / 100, c);
+        }
+        if (!isFinite(v)) v = 0;
         result.innerHTML = '&#8377; ' + Math.round(v).toLocaleString('en-IN');
       }
       links.forEach(function (link) {
@@ -988,6 +1032,7 @@
           }
         });
       });
+      render('sip');
     })();
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
