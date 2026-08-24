@@ -45,7 +45,7 @@
   .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; text-align: left; padding: 120px 24px 40px 64px; position: relative; overflow: hidden; background: linear-gradient(135deg, #0a3d62 0%, #128c7e 100%); color: #fff; }
   .hero::before { content: ''; position: absolute; inset: 0;
     background:
-      linear-gradient(rgba(10,61,98,.88), rgba(18,140,124,.82)),
+      linear-gradient(rgba(10,61,98,.5), rgba(18,140,124,.45)),
       url('images/hero_img-opt.png') center/cover no-repeat; }
   .hero .inner { position: relative; z-index: 1; max-width: 820px; margin: 0; }
   .badge { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(126,217,87,.5); color: var(--green); padding: 8px 16px; border-radius: 999px; font-size: 14px; font-weight: 600; margin-bottom: 26px; }
@@ -72,7 +72,7 @@
 
   /* ---------- SECTIONS ---------- */
   section.block { padding: 96px 0; }
-  .about { background: #eef4ff; }
+  .about { background: #eef4ff; min-height: 100vh; padding: 80px 0; display: flex; align-items: center; }
   .about-head { margin-bottom: 48px; }
   .section-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
   .eyebrow { color: var(--green); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: 13px; }
@@ -175,7 +175,7 @@
   .about-copy h2 .green { color: var(--green); }
   .about-copy p { color: var(--muted); margin-bottom: 16px; font-size: 1.02rem; }
   .about-media { border-radius: 0; overflow: hidden; box-shadow: 0 30px 60px rgba(0,74,173,.25); }
-  .about-media img { width: 100%; height: 460px; object-fit: cover; }
+  .about-media img { width: 100%; height: 100%; max-height: 80vh; object-fit: cover; }
 
   /* why choose */
   .why { background: var(--surface); }
@@ -264,7 +264,7 @@
   @media (max-width: 960px) {
     .feat-grid, .calc-grid, .steps, .steps-4, .price-grid, .stats-grid { grid-template-columns: 1fr 1fr; }
     .about-split { grid-template-columns: 1fr; gap: 32px; }
-    .about-media img { height: 300px; }
+    .about-media img { height: 300px; max-height: 50vh; }
     .footer-grid { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 640px) {
@@ -275,6 +275,7 @@
     .feat-grid, .calc-grid, .steps, .steps-4, .price-grid, .stats-grid { grid-template-columns: 1fr; }
     .kpis { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; }
+    .about { padding: 60px 0; }
   }
 </style>
 </head>
@@ -361,7 +362,7 @@
             </div>
           </div>
           <div class="svc-card">
-            <img loading="lazy" class="svc-img" src="images/our_services/putting-money-coins-saving-glass-bottle-concept-investment-mutual-fund-finance-business-placed-textbook-content-money-saving-education-opt.jpg" alt="Child Education Investment">
+            <img loading="lazy" class="svc-img" src="images/our_services/putting-money-coins-saving-glass-bottle-concept-investment-mutual-fund-finance-business-placed-textbook-content-money-saving-education-opt.png" alt="Child Education Investment">
             <div class="svc-body">
               <h3>Child Education Investment</h3>
               <p>Build a dedicated education fund that secures your child's future with disciplined, goal-oriented investing.</p>
@@ -372,12 +373,12 @@
             <img loading="lazy" class="svc-img" src="images/our_services/pointing-out-goals-opt.jpg" alt="Goal Based Investment">
             <div class="svc-body">
               <h3>Goal Based Investment</h3>
-              <p>Every investment aligned with your life milestones &mdash; from buying a home to starting a business.</p>
+              <p>Every investment aligned with your life milestones &mdash; from buying a home, purchasing a car, planning travel, starting a business, to funding your children's marriage.</p>
               <a href="#" class="link">Book For Free Consultation</a>
             </div>
           </div>
           <div class="svc-card">
-            <img loading="lazy" class="svc-img" src="images/our_services/retirement-plan-financial-investment-application-form-concept-opt.jpg" alt="Retirement Planning">
+            <img loading="lazy" class="svc-img" src="images/our_services/retirement-plan-financial-investment-application-form-concept-opt.png" alt="Retirement Planning">
             <div class="svc-body">
               <h3>Retirement Planning</h3>
               <p>Build a secure retirement corpus with strategies designed to provide financial independence and peace of mind after retirement.</p>
@@ -610,7 +611,7 @@
           <div class="card t-card border-0 h-100">
             <div class="t-head">
               <div class="avatar">SR</div>
-              <div><strong>Rahul Sharma</strong><span>Homeowner &amp; Investor</span></div>
+              <div><strong>Rahul</strong><span>Homeowner &amp; Investor</span></div>
               <span class="verified">&#10003; Verified</span>
             </div>
             <div class="t-body">
@@ -623,7 +624,7 @@
           <div class="card t-card border-0 h-100">
             <div class="t-head">
               <div class="avatar">PK</div>
-              <div><strong>Priya Kumar</strong><span>Retiring Professional</span></div>
+              <div><strong>Priya</strong><span>Retiring Professional</span></div>
               <span class="verified">&#10003; Verified</span>
             </div>
             <div class="t-body">
@@ -636,7 +637,7 @@
           <div class="card t-card border-0 h-100">
             <div class="t-head">
               <div class="avatar">AM</div>
-              <div><strong>Anand Mehta</strong><span>Small Business Owner</span></div>
+              <div><strong>Anand</strong><span>Small Business Owner</span></div>
               <span class="verified">&#10003; Verified</span>
             </div>
             <div class="t-body">
@@ -649,7 +650,7 @@
           <div class="card t-card border-0 h-100">
             <div class="t-head">
               <div class="avatar">SG</div>
-              <div><strong>Sneha Gupta</strong><span>Young Professional</span></div>
+              <div><strong>Sneha</strong><span>Young Professional</span></div>
               <span class="verified">&#10003; Verified</span>
             </div>
             <div class="t-body">
@@ -662,7 +663,7 @@
           <div class="card t-card border-0 h-100">
             <div class="t-head">
               <div class="avatar">VR</div>
-              <div><strong>Vikram Rao</strong><span>Startup Founder</span></div>
+              <div><strong>Vikram</strong><span>Startup Founder</span></div>
               <span class="verified">&#10003; Verified</span>
             </div>
             <div class="t-body">
@@ -675,7 +676,7 @@
           <div class="card t-card border-0 h-100">
             <div class="t-head">
               <div class="avatar">NJ</div>
-              <div><strong>Neha Joshi</strong><span>Doctor</span></div>
+              <div><strong>Malar</strong><span>Doctor</span></div>
               <span class="verified">&#10003; Verified</span>
             </div>
             <div class="t-body">
@@ -713,7 +714,7 @@
               <div class="col-12 col-md-6"><label class="form-label">Full Name</label><input type="text" class="form-control" name="name" placeholder="Enter your name" required></div>
               <div class="col-12 col-md-6"><label class="form-label">Phone Number</label><input type="tel" class="form-control" name="phone" placeholder="+91 XXXXX XXXXX" required></div>
               <div class="col-12"><label class="form-label">Email</label><input type="email" class="form-control" name="email" placeholder="you@example.com" required></div>
-              <div class="col-12"><label class="form-label">Subject</label><select class="form-select rounded-0 border-secondary-subtle" name="subject"><option selected>General Inquiry</option><option>Investment Planning</option><option>Retirement Planning</option><option>Insurance</option></select></div>
+              <div class="col-12"><label class="form-label">Subject</label><select class="form-select rounded-0 border-secondary-subtle" name="subject"><option selected>General Inquiry</option><option>Investment Planning</option><option>Retirement Planning</option><option>Insurance</option><option>Mutual Fund</option></select></div>
               <div class="col-12"><label class="form-label">Message</label><textarea class="form-control" name="message" rows="4" placeholder="How can we help you?" required></textarea></div>
               <div class="col-12"><button type="submit" class="btn btn-submit">Send Message</button></div>
             </form>
