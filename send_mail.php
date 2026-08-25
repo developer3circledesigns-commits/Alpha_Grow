@@ -83,7 +83,6 @@ unset($_SESSION['captcha']); // single-use: invalidate so it cannot be reused
 if (mb_strlen($name) < 2)                           respond(false, 'Please enter your full name.');
 if (!preg_match('/^[0-9+()\-\s]{7,20}$/', $phone)) respond(false, 'Please enter a valid phone number.');
 if (!filter_var($email, FILTER_VALIDATE_EMAIL))     respond(false, 'Please enter a valid email address.');
-if (mb_strlen($message) < 10)                       respond(false, 'Please enter a message of at least 10 characters.');
 
 /* ---- sanitize header fields: strip CR/LF & control chars (prevent header/CRLF injection) ---- */
 $name    = mb_substr(cleanHeader($name), 0, 100);
