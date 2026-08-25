@@ -6,6 +6,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/favicon.png">
 <title>Alphagrow &mdash; Wealth Creation & Financial Security</title>
 <style>
   :root {
@@ -28,6 +30,22 @@
   img { display: block; max-width: 100%; }
   .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
+  /* ---------- SCROLL REVEAL (fade-in-up, like layout-01) ---------- */
+  .anim { opacity: 0; transform: translateY(60px); transition: opacity 0.8s cubic-bezier(.22,1,.36,1), transform 0.8s cubic-bezier(.22,1,.36,1); }
+  .anim.visible { opacity: 1; transform: translateY(0); }
+  .anim-d1 { transition-delay: 0.1s; }
+  .anim-d2 { transition-delay: 0.2s; }
+  .anim-d3 { transition-delay: 0.3s; }
+  .anim-d4 { transition-delay: 0.4s; }
+  .anim-d5 { transition-delay: 0.5s; }
+  .anim-d6 { transition-delay: 0.6s; }
+  .svc-grid .svc-card:nth-child(3n+2),
+  .feat-grid .feat:nth-child(3n+2),
+  .testimonials .row > *:nth-child(3n+2) { transition-delay: 0.1s; }
+  .svc-grid .svc-card:nth-child(3n+3),
+  .feat-grid .feat:nth-child(3n+3),
+  .testimonials .row > *:nth-child(3n+3) { transition-delay: 0.2s; }
+
   /* ---------- NAV ---------- */
   header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: #fff; border: 0; border-radius: 0; }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 70px; padding: 0 24px; max-width: 100%; }
@@ -40,6 +58,7 @@
   .nav-cta { padding: 10px 22px; background: var(--green); color: #04281a !important; border-radius: 0; font-weight: 700; transition: transform .15s ease; }
   .nav-cta:hover { transform: translateY(-1px); color: #04281a; }
   .menu-btn { display: none; background: none; border: 0; color: var(--blue); font-size: 26px; cursor: pointer; }
+  .nav-call { display: none; align-items: center; justify-content: center; width: 44px; height: 44px; margin-left: auto; background: var(--green); color: #04281a; border-radius: 50%; font-size: 19px; flex-shrink: 0; }
 
   /* ---------- HERO (09 Dark Blue) ---------- */
   .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; text-align: left; padding: 120px 24px 40px 64px; position: relative; overflow: hidden; background: linear-gradient(135deg, #0a3d62 0%, #128c7e 100%); color: #fff; }
@@ -95,16 +114,14 @@
   .services .section-head h2 { color: #fff; }
   .services .section-head p { color: rgba(255,255,255,.7); }
   .services .section-head .green { color: var(--green); }
-  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .svc-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 0; overflow: hidden; transition: transform .15s ease; }
+  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; grid-auto-rows: 1fr; }
+  .svc-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 0; overflow: hidden; transition: transform .15s ease; display: flex; flex-direction: column; height: 100%; }
   .svc-card:hover { transform: translateY(-4px); }
-  .svc-card .svc-img { width: 100%; height: 200px; object-fit: cover; display: block; }
-  .svc-card .svc-body { padding: 24px; }
+  .svc-card .svc-img { width: 100%; height: 200px; object-fit: cover; display: block; flex-shrink: 0; }
+  .svc-card .svc-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
   .svc-card h3 { font-size: 18px; color: #fff; margin-bottom: 10px; }
   .svc-card p { color: rgba(255,255,255,.7); font-size: 15px; line-height: 1.65; }
-  .svc-card .link { display: inline-block; margin-top: 14px; color: var(--green); text-decoration: none; font-weight: 700; font-size: 14px; }
-  @media (max-width: 960px) { .svc-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 640px) { .svc-grid { grid-template-columns: 1fr; } }
+  .svc-card .link { display: inline-block; margin-top: auto; padding-top: 14px; color: var(--green); text-decoration: none; font-weight: 700; font-size: 14px; }
 
   /* calculators (02 featured hero) */
   .calcs { background: #ffffff; }
@@ -122,18 +139,19 @@
   .calc-featured .cf-details li i { color: var(--green); font-size: 16px; line-height: 1.4; }
   .calc-quick .result { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); padding: 14px 16px; font-size: 14px; overflow: hidden; }
   .calc-quick .result strong { color: var(--green); font-size: 20px; display: block; margin-top: 4px; word-break: break-all; line-height: 1.3; }
+  .calc-quick .result .r-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 9px 0; border-top: 1px solid rgba(255,255,255,.15); }
+  .calc-quick .result .r-row:first-child { border-top: 0; }
+  .calc-quick .result .r-row span { font-size: 13px; color: rgba(255,255,255,.82); }
+  .calc-quick .result .r-row strong { color: var(--green); font-size: 18px; margin-top: 0; }
+  .calc-quick .result .r-row.r-total strong { font-size: 22px; }
+  .calc-quick .calc-btn { margin-top: 16px; width: 100%; background: var(--green); color: #04281a; border: 0; padding: 13px 16px; font-weight: 800; font-size: 15px; cursor: pointer; border-radius: 0; transition: background .15s ease; }
+  .calc-quick .calc-btn:hover { background: #6fd14b; }
   .calc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .calc-link { background: #fff; border: 1px solid var(--line); border-radius: 0; padding: 16px 20px; display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); transition: transform .15s ease, box-shadow .15s ease; }
   .calc-link:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0,74,173,.12); }
   .calc-link .dot { width: 34px; height: 34px; flex-shrink: 0; border-radius: 0; display: flex; align-items: center; justify-content: center; font-size: 15px; }
   .calc-link span { font-size: 14px; font-weight: 600; }
   .calc-link.active { border-color: var(--blue); box-shadow: 0 0 0 2px rgba(0,74,173,.15); }
-  @media (max-width: 960px) { .calc-featured { grid-template-columns: 1fr; } }
-  @media (max-width: 480px) {
-    .calc-quick input { padding: 11px 12px; font-size: 14px; }
-    .calc-quick label { font-size: 11px; }
-    .calc-featured .open { width: 100%; text-align: center; }
-  }
 
   .feat p { color: var(--muted); font-size: 15px; }
 
@@ -211,6 +229,7 @@
   .info-panel > p { color: rgba(255,255,255,.8); margin-bottom: 28px; }
   .info-item { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 20px; }
   .info-item .ic { width: 46px; height: 46px; flex-shrink: 0; background: rgba(126,217,87,.18); border: 1px solid rgba(126,217,87,.35); color: var(--green); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+  .info-item .ic i { font-size: 20px; line-height: 1; }
   .info-item strong { display: block; font-size: 14px; }
   .info-item span, .info-item a { color: rgba(255,255,255,.82); font-size: 14px; display: block; }
   .info-item a:hover { color: var(--green); }
@@ -220,6 +239,16 @@
   .form-control:focus, .form-select:focus { border-color: var(--blue); box-shadow: 0 0 0 .2rem rgba(0,74,173,.15); }
   .btn-submit { border-radius: 0; background: var(--green); color: #04281a; font-weight: 700; padding: .7rem 1.6rem; border: 0; }
   .btn-submit:hover { background: #6fd14b; color: #04281a; }
+  .btn-submit:disabled { opacity: .6; cursor: not-allowed; }
+  .form-status { font-size: 14px; padding: 10px 14px; margin-top: 6px; border-radius: 0; display: none; }
+  .captcha-row { display: flex; gap: 10px; align-items: center; }
+  .captcha-img { height: 44px; border: 1px solid #e3ebf8; border-radius: 0; display: block; }
+  .captcha-input { flex: 1; max-width: 170px; text-transform: uppercase; letter-spacing: 3px; font-weight: 700; }
+  .btn-captcha-refresh { background: var(--blue); color: #fff; border: 0; width: 44px; height: 44px; font-size: 20px; line-height: 1; cursor: pointer; border-radius: 0; flex: 0 0 auto; }
+  .btn-captcha-refresh:hover { background: var(--blue-light); }
+  .form-status.show { display: block; }
+  .form-status.success { background: rgba(126,217,87,.18); border: 1px solid var(--green); color: #04281a; }
+  .form-status.error { background: rgba(255,90,90,.12); border: 1px solid #ff5a5a; color: #a30000; }
 
   /* pricing (unused - kept for reference)
   .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
@@ -260,22 +289,101 @@
   .footer-col a:hover { color: var(--green); }
   .footer-bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 24px; font-size: 13px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 
-  /* responsive */
-  @media (max-width: 960px) {
-    .feat-grid, .calc-grid, .steps, .steps-4, .price-grid, .stats-grid { grid-template-columns: 1fr 1fr; }
-    .about-split { grid-template-columns: 1fr; gap: 32px; }
-    .about-media img { height: 300px; max-height: 50vh; }
-    .footer-grid { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 640px) {
-    .nav-links { display: none; position: absolute; top: 70px; left: 0; right: 0; flex-direction: column; gap: 0; background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.12); padding: 12px 24px; }
+  /* ======================================================
+     RESPONSIVE (tablet + mobile ONLY — desktop untouched)
+     Strategy: 1024 tablet · 768 tablet-portrait · 640 mobile · 480 small · 360 tiny
+     ====================================================== */
+
+  /* ---------- TABLET (<=1024px) ---------- */
+  @media (max-width: 1024px) {
+    /* collapse navbar into hamburger on tablets (desktop >1024 keeps full nav) */
+    .nav-links {
+      display: none;
+      position: absolute; top: 70px; left: 0; right: 0;
+      flex-direction: column; gap: 0;
+      background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.12); padding: 12px 24px;
+    }
     .nav-links.open { display: flex; }
     .nav-links a { padding: 12px 0; border-bottom: 1px solid var(--line); }
     .menu-btn { display: block; }
-    .feat-grid, .calc-grid, .steps, .steps-4, .price-grid, .stats-grid { grid-template-columns: 1fr; }
-    .kpis { grid-template-columns: 1fr; }
+    .nav-call { display: inline-flex; }
+
+    .feat-grid, .calc-grid, .svc-grid, .steps, .steps-4, .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-split { grid-template-columns: 1fr; gap: 32px; }
+    .about { min-height: auto; }
+    .calc-featured { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .footer-brand { grid-column: 1 / -1; }
+  }
+
+  /* ---------- TABLET PORTRAIT (<=768px) ---------- */
+  @media (max-width: 768px) {
+    .container { padding: 0 20px; }
+    .section.block { padding: 76px 0; }
+    .about { padding: 64px 0; }
+    .hero { padding: 112px 22px 44px; }
+    .about-media img { height: 300px; max-height: 50vh; }
+    .info-panel, .form-panel { height: auto; }
+  }
+
+  /* ---------- MOBILE (<=640px) ---------- */
+  @media (max-width: 640px) {
+    .feat-grid, .calc-grid, .svc-grid, .steps { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }   /* 4 stats stay 2-up on phones */
+    .steps-4 { grid-template-columns: 1fr 1fr; }       /* 4 steps stay 2-up on phones */
     .footer-grid { grid-template-columns: 1fr; }
-    .about { padding: 60px 0; }
+    .hero { padding: 96px 20px 36px; text-align: center; }
+    .hero .inner { max-width: 100%; }
+    .cta { gap: 12px; justify-content: center; }
+    /* center ALL content/text on mobile (tablet + desktop untouched) */
+    body { text-align: center; }
+    .hero, .hero .inner, .about-copy, .info-panel, .form-panel, .footer-col, .footer-brand,
+    .testimonials .t-card, .testimonials .t-body, .calc-featured, .calc-featured .cf-left,
+    .calc-featured .cf-right, .svc-card, .feat, .stat, .faq-accordion, .faq-accordion .accordion-button,
+    .logos, .logos .logo-row, .about-split, .about { text-align: center; }
+    .hero-trust, .info-item, .captcha-row { justify-content: center; }
+    .nav-links a { text-align: center; }
+    .form-control, .form-select, .calc-quick input, .calc-quick .result { text-align: center; }
+    .about-media { margin: 0 auto; }
+    .footer-bottom { flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 7px 13px; }
+    .about-media img { height: 260px; max-height: 46vh; }
+    .section.block { padding: 60px 0; }
+    .svc-card .svc-img { height: 180px; }
+  }
+
+  /* ---------- SMALL MOBILE (<=480px) ---------- */
+  @media (max-width: 480px) {
+    .container { padding: 0 16px; }
+    .nav-inner { padding: 0 16px; }
+    .section.block { padding: 52px 0; }
+    .hero { padding: 92px 16px 32px; }
+    .hero h1 { line-height: 1.14; font-size: clamp(1.85rem, 7.5vw, 2.5rem); }
+    .section-head h2 { font-size: clamp(1.5rem, 6vw, 2rem); line-height: 1.2; }
+    .about-copy h2 { font-size: clamp(1.5rem, 6vw, 2rem); line-height: 1.2; }
+    .cta-band h2 { font-size: clamp(1.6rem, 6vw, 2.2rem); line-height: 1.2; }
+    .stat strong { font-size: clamp(1.5rem, 7vw, 2.1rem); }
+    .calc-featured h3 { font-size: clamp(1.3rem, 5vw, 1.6rem); }
+    .nav-links a { font-size: 16px; }
+    .hero p { font-size: 1rem; }
+    .section-head p { font-size: 1rem; }
+    .about { padding: 52px 0; }
+    .about-media img { height: 220px; max-height: 42vh; }
+    .svc-card .svc-img { height: 160px; }
+    .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+    .calc-quick input { padding: 11px 12px; font-size: 14px; }
+    .calc-quick label { font-size: 11px; }
+    .calc-featured .open { width: 100%; text-align: center; }
+    .info-panel { padding: 32px 24px; }
+    .form-panel { padding: 32px 20px; }
+  }
+
+  /* ---------- TINY MOBILE (<=360px) ---------- */
+  @media (max-width: 360px) {
+    .hero h1 { font-size: clamp(1.9rem, 8vw, 2.3rem); }
+    .cta .btn { width: 100%; justify-content: center; }
+    .section-head h2 { font-size: clamp(1.55rem, 7vw, 2rem); }
+    .badge { font-size: 11px; padding: 6px 12px; }
   }
 </style>
 </head>
@@ -290,10 +398,12 @@
         <a href="#about">About Us</a>
         <a href="#services">Services</a>
         <a href="#calculators">Calculator</a>
+        <a href="blogs/index.html">Blogs</a>
         <a href="#contact">Contact Us</a>
         <a href="tel:+918754500310">+91 87545 00310</a>
         <a href="#contact" class="nav-cta">Invest Now</a>
       </nav>
+      <a href="tel:+918754500310" class="nav-call" aria-label="Call AlphaGrow"><i class="bi bi-telephone-fill"></i></a>
       <button class="menu-btn" aria-label="Menu">&#9776;</button>
     </div>
   </header>
@@ -301,25 +411,25 @@
   <!-- ======= HERO (09 Dark Blue) ======= -->
   <section class="hero" id="home">
     <div class="inner">
-      <span class="badge"><span class="dot"></span> Your Trusted Partner in Wealth Creation &amp; Financial Security</span>
-      <h1>Invest Smarter Today. <span class="green">Secure Your Life Tomorrow.</span></h1>
-      <p>Everyone's financial journey is unique. Alphagrow creates personalized investment pathways to help you build wealth, protect your family, and secure a confident retirement.</p>
-      <div class="cta">
+      <span class="badge anim"><span class="dot"></span> Your Trusted Partner in Wealth Creation &amp; Financial Security</span>
+      <h1 class="anim anim-d1">Invest Smarter Today. <span class="green">Secure Your Life Tomorrow.</span></h1>
+      <p class="anim anim-d2">Everyone's financial journey is unique. Alphagrow creates personalized investment pathways to help you build wealth, protect your family, and secure a confident retirement.</p>
+      <div class="cta anim anim-d3">
         <a href="#contact" class="btn btn-green">Get Free Consultation</a>
         <a href="#services" class="btn btn-ghost">Explore Services &#8594;</a>
       </div>
     </div>
-    <span class="scroll">Scroll to explore &#8595;</span>
+    <span class="scroll anim anim-d4">Scroll to explore &#8595;</span>
   </section>
 
   <!-- ======= ABOUT ======= -->
   <section class="block about" id="about">
     <div class="container">
-      <div class="section-head about-head">
+      <div class="section-head about-head anim">
         <div class="eyebrow">About Alphagrow</div>
       </div>
       <div class="about-split">
-        <div class="about-copy" style="text-align: left;">
+        <div class="about-copy anim anim-d1">
           <h2>Building Wealth Through <span class="green">Smart Financial Decisions</span></h2>
           <p>Investing is like a farmer growing trees &mdash; you plant the seed, water it, wait patiently, and finally enjoy the fruits. The same principle applies to wealth creation: disciplined saving, consistent investing, and time allow your money to grow and bear fruit.</p>
           <ul style="margin:28px 0 0;padding:0;list-style:none;">
@@ -330,7 +440,7 @@
             <li style="display:flex;margin-bottom:12px;"><span style="width:24px;flex-shrink:0;">&#10003;</span><span><strong>Legacy &amp; Freedom (Preserving Wealth)</strong></span></li>
           </ul>
         </div>
-        <div class="about-media">
+        <div class="about-media anim anim-d2">
           <img loading="lazy" src="images/about-opt.png" alt="Financial advisor guiding wealth planning" width="768" height="460">
         </div>
       </div>
@@ -340,12 +450,12 @@
   <!-- ======= SERVICES ======= -->
   <section class="block services" id="services">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head anim">
         <div class="eyebrow">Our Services</div>
         <h2>Comprehensive <span class="green">Financial Solutions</span></h2>
       </div>
       <div class="svc-grid">
-          <div class="svc-card">
+          <div class="svc-card anim">
             <img loading="lazy" class="svc-img" src="images/our_services/stock-market-exchange-economics-investment-graph-opt.jpg" alt="Personal Financial Planning">
             <div class="svc-body">
               <h3>Personal Financial Planning</h3>
@@ -353,7 +463,7 @@
               <a href="#" class="link">Book For Free Consultation</a>
             </div>
           </div>
-          <div class="svc-card">
+          <div class="svc-card anim">
             <img loading="lazy" class="svc-img" src="images/our_services/hand-adding-coins-stack-covered-dirt-plants-opt.jpg" alt="Mutual Fund Investment">
             <div class="svc-body">
               <h3>Mutual Fund Investment</h3>
@@ -361,7 +471,7 @@
               <a href="#" class="link">Book For Free Consultation</a>
             </div>
           </div>
-          <div class="svc-card">
+          <div class="svc-card anim">
             <img loading="lazy" class="svc-img" src="images/our_services/putting-money-coins-saving-glass-bottle-concept-investment-mutual-fund-finance-business-placed-textbook-content-money-saving-education-opt.png" alt="Child Education Investment">
             <div class="svc-body">
               <h3>Child Education Investment</h3>
@@ -369,7 +479,7 @@
               <a href="#" class="link">Book For Free Consultation</a>
             </div>
           </div>
-          <div class="svc-card">
+          <div class="svc-card anim">
             <img loading="lazy" class="svc-img" src="images/our_services/pointing-out-goals-opt.jpg" alt="Goal Based Investment">
             <div class="svc-body">
               <h3>Goal Based Investment</h3>
@@ -377,7 +487,7 @@
               <a href="#" class="link">Book For Free Consultation</a>
             </div>
           </div>
-          <div class="svc-card">
+          <div class="svc-card anim">
             <img loading="lazy" class="svc-img" src="images/our_services/retirement-plan-financial-investment-application-form-concept-opt.png" alt="Retirement Planning">
             <div class="svc-body">
               <h3>Retirement Planning</h3>
@@ -385,7 +495,7 @@
               <a href="#" class="link">Book For Free Consultation</a>
             </div>
           </div>
-          <div class="svc-card">
+          <div class="svc-card anim">
             <img loading="lazy" class="svc-img" src="images/our_services/family-insurance-reimbursement-protection-concept-opt.jpg" alt="Health Insurance Plan">
             <div class="svc-body">
               <h3>Health Insurance Plan</h3>
@@ -393,7 +503,7 @@
               <a href="#" class="link">Book For Free Consultation</a>
             </div>
           </div>
-          <div class="svc-card">
+          <div class="svc-card anim">
             <img loading="lazy" class="svc-img" src="images/our_services/life-insurance-protection-beneficiary-safeguard-concept-opt.jpg" alt="Life Insurance Plan">
             <div class="svc-body">
               <h3>Life Insurance Plan</h3>
@@ -401,7 +511,7 @@
               <a href="#" class="link">Book For Free Consultation</a>
             </div>
           </div>
-          <div class="svc-card">
+          <div class="svc-card anim">
             <img loading="lazy" class="svc-img" src="images/our_services/hand-holding-coin-bank-symbolizing-wealth-growth-generated-by-ai-opt.jpg" alt="Emergency Fund">
             <div class="svc-body">
               <h3>Emergency Fund</h3>
@@ -409,7 +519,7 @@
               <a href="#" class="link">Book For Free Consultation</a>
             </div>
           </div>
-          <div class="svc-card">
+          <div class="svc-card anim">
             <img loading="lazy" class="svc-img" src="images/our_services/bond-investment-product-opt.jpg" alt="Bonds">
             <div class="svc-body">
               <h3>Bonds</h3>
@@ -424,12 +534,12 @@
   <!-- ======= CALCULATORS ======= -->
   <section class="block calcs" id="calculators">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head anim">
         <div class="eyebrow">Free Financial Calculators</div>
         <h2>Calculate Your <span class="green">Financial Future</span></h2>
         <p>Plan smarter with our suite of easy-to-use financial calculators.</p>
       </div>
-      <div class="calc-featured" id="calc-featured">
+      <div class="calc-featured anim anim-d1" id="calc-featured">
         <div class="cf-left">
           <div class="icon" id="cf-icon"><i class="bi bi-graph-up-arrow"></i></div>
           <h3 id="cf-title">Start with SIP Calculator</h3>
@@ -439,7 +549,6 @@
             <li><i class="bi bi-check2"></i> Returns compound over your chosen time period.</li>
             <li><i class="bi bi-check2"></i> Get an instant maturity value estimate.</li>
           </ul>
-          <a href="#" class="open">Open Full Calculator</a>
         </div>
         <div class="cf-right calc-quick" id="cf-form">
           <label for="sip-amount">Monthly Investment</label>
@@ -448,10 +557,12 @@
           <input type="number" id="sip-rate" placeholder="Expected return (%)" value="12">
           <label for="sip-years">Investment Period</label>
           <input type="number" id="sip-years" placeholder="Years" value="10">
-          <div class="result">Maturity Value<strong id="sip-out">&#8377; --</strong></div>
+          <div class="result" id="cf-result"></div>
+          <button type="button" class="calc-btn">Calculate</button>
         </div>
       </div>
-      <div class="calc-grid">
+      <div class="calc-grid anim anim-d2">
+        <a href="#" class="calc-link" data-calc="sip"><div class="dot" style="background:#7ED957;color:#04281a"><i class="bi bi-graph-up-arrow"></i></div><span>SIP Calculator</span></a>
         <a href="#" class="calc-link" data-calc="lumpsum"><div class="dot" style="background:#004AAD;color:#fff"><i class="bi bi-cash-stack"></i></div><span>Lumpsum Calculator</span></a>
         <a href="#" class="calc-link" data-calc="swp"><div class="dot" style="background:#7ED957;color:#04281a"><i class="bi bi-arrow-down-circle"></i></div><span>SWP Calculator</span></a>
         <a href="#" class="calc-link" data-calc="goal"><div class="dot" style="background:#004AAD;color:#fff"><i class="bi bi-bullseye"></i></div><span>Goal Based Investment</span></a>
@@ -468,37 +579,37 @@
   <!-- ======= WHY CHOOSE ======= -->
   <section class="block why">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head anim">
         <div class="eyebrow">Why Choose Alphagrow?</div>
         <h2>Your Success is <span class="green">Our Priority</span></h2>
       </div>
       <div class="feat-grid">
-        <div class="feat">
+        <div class="feat anim">
           <div class="icon icon-blue"><i class="bi bi-briefcase"></i></div>
           <h3>Personalized Financial Advice</h3>
           <p>Investment strategies tailored to your financial goals.</p>
         </div>
-        <div class="feat">
+        <div class="feat anim">
           <div class="icon icon-green"><i class="bi bi-search"></i></div>
           <h3>Trusted Guidance</h3>
           <p>Professional recommendations backed by research and market insights.</p>
         </div>
-        <div class="feat">
+        <div class="feat anim">
           <div class="icon icon-blue"><i class="bi bi-bullseye"></i></div>
           <h3>Goal-Based Planning</h3>
           <p>Every investment aligned with your life milestones.</p>
         </div>
-        <div class="feat">
+        <div class="feat anim">
           <div class="icon icon-green"><i class="bi bi-eye"></i></div>
           <h3>Transparent Process</h3>
           <p>Clear communication with no hidden complexities.</p>
         </div>
-        <div class="feat">
+        <div class="feat anim">
           <div class="icon icon-blue"><i class="bi bi-graph-up-arrow"></i></div>
           <h3>Long-Term Wealth Creation</h3>
           <p>Focused on sustainable growth rather than short-term gains.</p>
         </div>
-        <div class="feat">
+        <div class="feat anim">
           <div class="icon icon-green"><i class="bi bi-people"></i></div>
           <h3>Dedicated Support</h3>
           <p>Continuous portfolio review and expert assistance whenever you need it.</p>
@@ -510,11 +621,11 @@
   <!-- ======= FAQ ======= -->
   <section class="block faq">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head anim">
         <div class="eyebrow">FAQ / Quiz</div>
         <h2>Frequently Asked <span class="green">Questions</span></h2>
       </div>
-      <div class="accordion faq-accordion" id="faqAccordion">
+      <div class="accordion faq-accordion anim anim-d1" id="faqAccordion">
         <div class="accordion-item">
           <h2 class="accordion-header">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqOne" aria-expanded="true" aria-controls="faqOne">
@@ -602,12 +713,12 @@
     <!-- ======= TESTIMONIALS ======= -->
   <section class="block testimonials">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head anim">
         <div class="eyebrow">Testimonials</div>
         <h2>What Our <span class="green">Clients Say</span></h2>
       </div>
       <div class="row g-4">
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col-12 col-md-6 col-lg-4 anim">
           <div class="card t-card border-0 h-100">
             <div class="t-head">
               <div class="avatar">SR</div>
@@ -620,7 +731,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col-12 col-md-6 col-lg-4 anim">
           <div class="card t-card border-0 h-100">
             <div class="t-head">
               <div class="avatar">PK</div>
@@ -633,7 +744,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col-12 col-md-6 col-lg-4 anim">
           <div class="card t-card border-0 h-100">
             <div class="t-head">
               <div class="avatar">AM</div>
@@ -646,7 +757,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col-12 col-md-6 col-lg-4 anim">
           <div class="card t-card border-0 h-100">
             <div class="t-head">
               <div class="avatar">SG</div>
@@ -659,7 +770,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col-12 col-md-6 col-lg-4 anim">
           <div class="card t-card border-0 h-100">
             <div class="t-head">
               <div class="avatar">VR</div>
@@ -672,10 +783,10 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col-12 col-md-6 col-lg-4 anim">
           <div class="card t-card border-0 h-100">
             <div class="t-head">
-              <div class="avatar">NJ</div>
+              <div class="avatar">MA</div>
               <div><strong>Malar</strong><span>Doctor</span></div>
               <span class="verified">&#10003; Verified</span>
             </div>
@@ -692,31 +803,42 @@
   <!-- ======= CONTACT ======= -->
   <section class="block contact" id="contact">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head anim">
         <div class="eyebrow">Contact Us</div>
         <h2>Get in <span class="green">Touch</span></h2>
         <p>Have a question or ready to start? Reach out and our advisors will get back to you shortly.</p>
       </div>
       <div class="row g-4 align-items-stretch">
-        <div class="col-12 col-lg-5">
+        <div class="col-12 col-lg-5 anim anim-d1">
           <div class="info-panel">
             <h3>Talk to Our Advisors</h3>
             <p>We're here to guide you at every step of your financial journey.</p>
-            <div class="info-item"><div class="ic">&#9742;</div><div><strong>Phone</strong><a href="tel:+918754500310">+91 87545 00310</a></div></div>
-            <div class="info-item"><div class="ic">&#9993;</div><div><strong>Email</strong><a href="mailto:info@alphagrow.com">info@alphagrow.com</a></div></div>
-            <div class="info-item"><div class="ic">&#128205;</div><div><strong>Office</strong><span>Chennai, India</span></div></div>
-            <div class="info-item"><div class="ic">&#128336;</div><div><strong>Working Hours</strong><span>Mon - Sat � 9:00 AM - 7:00 PM</span></div></div>
+            <div class="info-item"><div class="ic"><i class="bi bi-telephone"></i></div><div><strong>Phone</strong><a href="tel:+918754500310">+91 87545 00310</a></div></div>
+            <div class="info-item"><div class="ic"><i class="bi bi-envelope"></i></div><div><strong>Email</strong><a href="mailto:investalphagrow@gmail.com">investalphagrow@gmail.com</a></div></div>
+            <div class="info-item"><div class="ic"><i class="bi bi-geo-alt"></i></div><div><strong>Office</strong><span>Chennai, India</span></div></div>
+            <div class="info-item"><div class="ic"><i class="bi bi-clock"></i></div><div><strong>Working Hours</strong><span>Mon &ndash; Sat, 9:00 AM &ndash; 7:00 PM</span></div></div>
           </div>
         </div>
-        <div class="col-12 col-lg-7">
+        <div class="col-12 col-lg-7 anim anim-d2">
           <div class="form-panel">
-            <form id="contact-form" class="row g-3">
+            <form id="contact-form" class="row g-3" action="send_mail.php" method="post" novalidate>
+              <input type="text" name="ag_check" id="ag_check" tabindex="-1" autocomplete="off" readonly aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+              <input type="hidden" name="csrf_token" id="csrf_token">
               <div class="col-12 col-md-6"><label class="form-label">Full Name</label><input type="text" class="form-control" name="name" placeholder="Enter your name" required></div>
               <div class="col-12 col-md-6"><label class="form-label">Phone Number</label><input type="tel" class="form-control" name="phone" placeholder="+91 XXXXX XXXXX" required></div>
               <div class="col-12"><label class="form-label">Email</label><input type="email" class="form-control" name="email" placeholder="you@example.com" required></div>
               <div class="col-12"><label class="form-label">Services</label><select class="form-select rounded-0 border-secondary-subtle" name="subject"><option selected>General Inquiry</option><option>Personal Financial Planning</option><option>Mutual Fund Investment</option><option>Child Education Investment</option><option>Goal Based Investment</option><option>Retirement Planning</option><option>Health Insurance Plan</option><option>Life Insurance Plan</option><option>Emergency Fund</option><option>Bonds</option></select></div>
               <div class="col-12"><label class="form-label">Message</label><textarea class="form-control" name="message" rows="4" placeholder="How can we help you?" required></textarea></div>
+              <div class="col-12">
+                <label class="form-label">Human verification</label>
+                <div class="captcha-row">
+                  <img id="captcha-img" src="captcha.php" alt="CAPTCHA code" class="captcha-img">
+                  <button type="button" id="captcha-refresh" class="btn-captcha-refresh" aria-label="Refresh captcha">&#8635;</button>
+                  <input type="text" class="form-control captcha-input" name="captcha" autocomplete="off" maxlength="5" placeholder="Enter code" required>
+                </div>
+              </div>
               <div class="col-12"><button type="submit" class="btn btn-submit">Send Message</button></div>
+              <div class="col-12"><div id="form-status" class="form-status" role="alert"></div></div>
             </form>
           </div>
         </div>
@@ -725,7 +847,7 @@
   </section>
 
   <!-- ======= FOOTER ======= -->
-  <footer>
+  <footer class="anim">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
@@ -736,6 +858,7 @@
           <h4>Company</h4>
 <a href="#about">About Us</a>
           <a href="#services">Services</a>
+          <a href="blogs/index.html">Blogs</a>
 <a href="#calculators">Calculator</a>
           <a href="#contact">Contact</a>
         </div>
@@ -754,7 +877,7 @@
         <div class="footer-col">
           <h4>Contact</h4>
           <a href="tel:+918754500310">+91 87545 00310</a>
-          <a href="mailto:info@alphagrow.com">info@alphagrow.com</a>
+          <a href="mailto:investalphagrow@gmail.com">investalphagrow@gmail.com</a>
           <a href="#contact">Chennai, India</a>
         </div>
       </div>
@@ -776,6 +899,114 @@
       nav.querySelectorAll('a').forEach(function (link) {
         link.addEventListener('click', function () {
           nav.classList.remove('open');
+        });
+      });
+    })();
+
+    // FADE-IN-UP SCROLL REVEAL
+    (function () {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      document.querySelectorAll('.anim').forEach(function (el) { observer.observe(el); });
+    })();
+
+    // CONTACT FORM: validation + AJAX submit to SMTP backend
+    (function () {
+      var form = document.getElementById('contact-form');
+      if (!form) return;
+      var status = document.getElementById('form-status');
+      function show(type, text) {
+        status.className = 'form-status show ' + type;
+        status.textContent = text;
+      }
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var data = new FormData(form);
+        var name = (data.get('name') || '').trim();
+        var phone = (data.get('phone') || '').trim();
+        var email = (data.get('email') || '').trim();
+        var msg = (data.get('message') || '').trim();
+        var cap = (data.get('captcha') || '').trim();
+        if (name.length < 2) return show('error', 'Please enter your full name.');
+        if (!/^[0-9+()\-\s]{7,15}$/.test(phone)) return show('error', 'Please enter a valid phone number (7–15 digits).');
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return show('error', 'Please enter a valid email address.');
+        if (msg.length < 10) return show('error', 'Please enter a message of at least 10 characters.');
+        if (cap.length < 5) return show('error', 'Please enter the captcha code shown.');
+
+        var btn = form.querySelector('.btn-submit');
+        btn.disabled = true; btn.textContent = 'Sending...';
+
+        function refreshCaptcha() {
+          var im = document.getElementById('captcha-img');
+          if (im) im.src = 'captcha.php?' + Date.now();
+          var ci = document.getElementById('captcha');
+          if (ci) ci.value = '';
+        }
+
+        function send() {
+          fetch('send_mail.php', { method: 'POST', body: new FormData(form) })
+            .then(function (r) { return r.json(); })
+            .then(function (res) {
+              btn.disabled = false; btn.textContent = 'Send Message';
+              refreshCaptcha();
+              if (res && res.ok) { form.reset(); show('success', res.msg || 'Thank you! Your message has been sent.'); }
+              else { show('error', (res && res.msg) || 'Sorry, we could not send your message. Please try again.'); }
+            })
+            .catch(function () {
+              btn.disabled = false; btn.textContent = 'Send Message';
+              refreshCaptcha();
+              show('error', 'Network error. Please check your connection and try again.');
+            });
+        }
+
+        // Ensure a CSRF token is present (fetched once) before submitting.
+        var tok = document.getElementById('csrf_token');
+        if (tok && !tok.value) {
+          fetch('csrf_token.php')
+            .then(function (r) { return r.json(); })
+            .then(function (j) { if (tok && j.token) tok.value = j.token; send(); })
+            .catch(function () { send(); });
+        } else {
+          send();
+        }
+      });
+
+      var capRefresh = document.getElementById('captcha-refresh');
+      if (capRefresh) capRefresh.addEventListener('click', function () {
+        var im = document.getElementById('captcha-img');
+        if (im) im.src = 'captcha.php?' + Date.now();
+        var ci = document.getElementById('captcha');
+        if (ci) ci.value = '';
+        if (ci) ci.focus();
+      });
+    })();
+
+    // WHATSAPP "BOOK FOR FREE CONSULTATION" (Services section)
+    (function () {
+      var wpNumber = '918754500310';
+      function buildMsg(service) {
+        var msg = 'Hello AlphaGrow,\n\n'
+          + 'I would like to book a *Free Consultation* for the following service:\n\n'
+          + '*Selected Service:* ' + service + '\n\n'
+          + 'Please share the next steps, plans, and any details I should know.\n\n'
+          + 'Name: \nPhone: \nEmail: \n\n'
+          + 'Thank you!';
+        return encodeURIComponent(msg);
+      }
+      var links = document.querySelectorAll('.svc-card .link');
+      links.forEach(function (link) {
+        var card = link.closest('.svc-card');
+        var service = card && card.querySelector('h3') ? card.querySelector('h3').textContent.trim() : 'Financial Consultation';
+        var url = 'https://wa.me/' + wpNumber + '?text=' + buildMsg(service);
+        link.setAttribute('href', url);
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          window.open(url, 'alphagrow_whatsapp');
         });
       });
     })();
@@ -946,16 +1177,23 @@
           html += '<label for="cf-' + key + '-' + i + '">' + f.label + '</label>';
           html += '<input type="number" id="cf-' + key + '-' + i + '" class="cf-input" data-idx="' + i + '" placeholder="' + f.placeholder + '" value="' + f.def + '">';
         });
-        html += '<div class="result">' + c.label + '<strong class="cf-result">&#8377; 0</strong></div>';
+        html += '<div class="result" id="cf-result"></div>';
+        html += '<button type="button" class="calc-btn">Calculate</button>';
         form.innerHTML = html;
         form.querySelectorAll('.cf-input').forEach(function (el) {
           el.addEventListener('input', updateResult);
         });
+        var btn = form.querySelector('.calc-btn');
+        if (btn) btn.addEventListener('click', updateResult);
         updateResult();
       }
+      function fmt(x) {
+        if (!isFinite(x)) x = 0;
+        return Math.round(x).toLocaleString('en-IN');
+      }
       function updateResult() {
-        var result = form.querySelector('.cf-result');
-        if (!result) return;
+        var box = form.querySelector('#cf-result');
+        if (!box) return;
         var vals = [];
         form.querySelectorAll('.cf-input').forEach(function (el) {
           vals.push(parseFloat(el.value) || 0);
@@ -966,7 +1204,7 @@
         var d = vals[3] || 0;
         var calcType = current;
         var v = 0;
-        
+
         switch(calcType) {
           case 'sip':
             var r = b / 12 / 100;
@@ -979,7 +1217,8 @@
           case 'swp':
             var r = b / 12 / 100;
             var n = c * 12;
-            v = a * Math.pow(1 + r, n) - d * ((Math.pow(1 + r, n) - 1) / r);
+            var f = Math.pow(1 + r, n);
+            v = r > 0 ? a * f - d * ((f - 1) / r) : a - d * n;
             if (v < 0) v = 0;
             break;
           case 'goal':
@@ -1007,7 +1246,7 @@
           case 'rd':
             var r = b / 12 / 100;
             var n = c * 12;
-            v = a * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
+            v = r > 0 ? a * ((Math.pow(1 + r, n) - 1) / r) * (1 + r) : a * n;
             break;
           case 'emi':
             var r = b / 12 / 100;
@@ -1018,7 +1257,18 @@
             v = a * Math.pow(1 + b / 100, c);
         }
         if (!isFinite(v)) v = 0;
-        result.innerHTML = '&#8377; ' + Math.round(v).toLocaleString('en-IN');
+
+        if (calcType === 'sip') {
+          var months = c * 12;
+          var totalInvest = a * months;
+          var estReturns = v - totalInvest;
+          box.innerHTML =
+            '<div class="r-row"><span>Total Investment</span><strong>&#8377; ' + fmt(totalInvest) + '</strong></div>' +
+            '<div class="r-row"><span>Estimated Returns</span><strong>&#8377; ' + fmt(estReturns) + '</strong></div>' +
+            '<div class="r-row r-total"><span>Maturity Value</span><strong>&#8377; ' + fmt(v) + '</strong></div>';
+        } else {
+          box.innerHTML = '<div class="r-row"><span>' + calcs[calcType].label + '</span><strong>&#8377; ' + fmt(v) + '</strong></div>';
+        }
       }
       links.forEach(function (link) {
         link.addEventListener('click', function (e) {
