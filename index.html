@@ -321,7 +321,15 @@
     .container { padding: 0 20px; }
     .section.block { padding: 76px 0; }
     .about { padding: 64px 0; }
-    .hero { padding: 112px 22px 44px; }
+    /* Hero matches hero-image proportions (1376x768) but always grows to fit
+       its content. Nav joins normal flow so it never covers the hero. */
+    header { position: relative; }
+    .hero {
+      padding: 40px 22px 36px;
+      min-height: calc(100vw / 1.792);
+      height: auto;
+    }
+    .hero .inner { max-width: 100%; }
     .about-media img { height: 300px; max-height: 50vh; }
     .info-panel, .form-panel { height: auto; }
   }
@@ -332,7 +340,11 @@
     .stats-grid { grid-template-columns: 1fr 1fr; }   /* 4 stats stay 2-up on phones */
     .steps-4 { grid-template-columns: 1fr 1fr; }       /* 4 steps stay 2-up on phones */
     .footer-grid { grid-template-columns: 1fr; }
-    .hero { padding: 96px 20px 36px; text-align: center; }
+    .hero { padding: 34px 20px 30px; text-align: center; min-height: calc(100vw / 1.792); height: auto; }
+    .hero p { margin: 16px 0 24px; }
+    .hero .badge { margin-bottom: 16px; }
+    .hero-trust { margin-top: 24px; gap: 18px; }
+    .cta { margin-bottom: 0; }
     .hero .inner { max-width: 100%; }
     .cta { gap: 12px; justify-content: center; }
     /* center ALL content/text on mobile (tablet + desktop untouched) */
@@ -357,7 +369,7 @@
     .container { padding: 0 16px; }
     .nav-inner { padding: 0 16px; }
     .section.block { padding: 52px 0; }
-    .hero { padding: 92px 16px 32px; }
+    .hero { padding: 28px 16px 26px; }
     .hero h1 { line-height: 1.14; font-size: clamp(1.85rem, 7.5vw, 2.5rem); }
     .section-head h2 { font-size: clamp(1.5rem, 6vw, 2rem); line-height: 1.2; }
     .about-copy h2 { font-size: clamp(1.5rem, 6vw, 2rem); line-height: 1.2; }
