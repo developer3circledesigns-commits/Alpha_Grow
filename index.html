@@ -550,27 +550,27 @@
           </ul>
         </div>
         <div class="cf-right calc-quick" id="cf-form">
-          <label for="sip-amount">Monthly Investment</label>
-          <input type="number" id="sip-amount" placeholder="Monthly investment (&#8377;)" value="5000">
-          <label for="sip-rate">Expected Return</label>
-          <input type="number" id="sip-rate" placeholder="Expected return (%)" value="12">
-          <label for="sip-years">Investment Period</label>
-          <input type="number" id="sip-years" placeholder="Years" value="10">
+          <label for="sip-amount">Monthly investment</label>
+          <input type="number" id="sip-amount" placeholder="Monthly investment" value="5000">
+          <label for="sip-rate">Expected return rate (p.a)</label>
+          <input type="number" id="sip-rate" placeholder="Expected return rate (p.a)" value="12">
+          <label for="sip-years">Time period (Year)</label>
+          <input type="number" id="sip-years" placeholder="Time period (Year)" value="10">
           <div class="result" id="cf-result"></div>
           <button type="button" class="calc-btn">Calculate</button>
         </div>
       </div>
       <div class="calc-grid anim anim-d2">
-        <a href="#" class="calc-link" data-calc="sip"><div class="dot" style="background:#7ED957;color:#04281a"><i class="bi bi-graph-up-arrow"></i></div><span>SIP Calculator</span></a>
-        <a href="#" class="calc-link" data-calc="lumpsum"><div class="dot" style="background:#004AAD;color:#fff"><i class="bi bi-cash-stack"></i></div><span>Lumpsum Calculator</span></a>
-        <a href="#" class="calc-link" data-calc="swp"><div class="dot" style="background:#7ED957;color:#04281a"><i class="bi bi-arrow-down-circle"></i></div><span>SWP Calculator</span></a>
-        <a href="#" class="calc-link" data-calc="goal"><div class="dot" style="background:#004AAD;color:#fff"><i class="bi bi-bullseye"></i></div><span>Goal Based Investment</span></a>
-        <a href="#" class="calc-link" data-calc="retirement"><div class="dot" style="background:#7ED957;color:#04281a"><i class="bi bi-bank"></i></div><span>Retirement Planning</span></a>
-        <a href="#" class="calc-link" data-calc="inflation"><div class="dot" style="background:#004AAD;color:#fff"><i class="bi bi-receipt"></i></div><span>Inflation Calculator</span></a>
-        <a href="#" class="calc-link" data-calc="tax"><div class="dot" style="background:#7ED957;color:#04281a"><i class="bi bi-graph-up-arrow"></i></div><span>Income Tax Calculator</span></a>
-        <a href="#" class="calc-link" data-calc="fd"><div class="dot" style="background:#004AAD;color:#fff"><i class="bi bi-piggy-bank"></i></div><span>FD Calculator</span></a>
-        <a href="#" class="calc-link" data-calc="rd"><div class="dot" style="background:#7ED957;color:#04281a"><i class="bi bi-currency-rupee"></i></div><span>RD Calculator</span></a>
-        <a href="#" class="calc-link" data-calc="emi"><div class="dot" style="background:#004AAD;color:#fff"><i class="bi bi-house-door"></i></div><span>EMI Calculator</span></a>
+        <a href="calculators.html#sip" class="calc-link" data-calc="sip"><div class="dot" style="background:#7ED957;color:#04281a"><i class="bi bi-graph-up-arrow"></i></div><span>SIP Calculator</span></a>
+        <a href="calculators.html#lumpsum" class="calc-link" data-calc="lumpsum"><div class="dot" style="background:#004AAD;color:#fff"><i class="bi bi-cash-stack"></i></div><span>Lumpsum Calculator</span></a>
+        <a href="calculators.html#swp" class="calc-link" data-calc="swp"><div class="dot" style="background:#7ED957;color:#04281a"><i class="bi bi-arrow-down-circle"></i></div><span>SWP Calculator</span></a>
+        <a href="calculators.html#goal" class="calc-link" data-calc="goal"><div class="dot" style="background:#004AAD;color:#fff"><i class="bi bi-bullseye"></i></div><span>Goal Based Investment</span></a>
+        <a href="calculators.html#retirement" class="calc-link" data-calc="retirement"><div class="dot" style="background:#7ED957;color:#04281a"><i class="bi bi-bank"></i></div><span>Retirement Planning</span></a>
+        <a href="calculators.html#inflation" class="calc-link" data-calc="inflation"><div class="dot" style="background:#004AAD;color:#fff"><i class="bi bi-receipt"></i></div><span>Inflation Calculator</span></a>
+        <a href="calculators.html#tax" class="calc-link" data-calc="tax"><div class="dot" style="background:#7ED957;color:#04281a"><i class="bi bi-graph-up-arrow"></i></div><span>Income Tax Calculator</span></a>
+        <a href="calculators.html#fd" class="calc-link" data-calc="fd"><div class="dot" style="background:#004AAD;color:#fff"><i class="bi bi-piggy-bank"></i></div><span>FD Calculator</span></a>
+        <a href="calculators.html#rd" class="calc-link" data-calc="rd"><div class="dot" style="background:#7ED957;color:#04281a"><i class="bi bi-currency-rupee"></i></div><span>RD Calculator</span></a>
+        <a href="calculators.html#emi" class="calc-link" data-calc="emi"><div class="dot" style="background:#004AAD;color:#fff"><i class="bi bi-house-door"></i></div><span>EMI Calculator</span></a>
       </div>
     </div>
   </section>
@@ -887,6 +887,8 @@
     </div>
   </footer>
 
+  <script src="calculator/engine.js?v=3"></script>
+
   <script>
     (function () {
       var btn = document.querySelector('.menu-btn');
@@ -1016,17 +1018,17 @@
           desc: 'See how your monthly investments can grow over time.',
           details: [
             'Invest a fixed amount every month to build long-term wealth.',
-            'Returns compound annually over your chosen time period.',
+            'Returns compound over your chosen time period.',
             'Get an instant estimate of your total maturity value.'
           ],
           fields: [
-            { label: 'Monthly Investment', placeholder: 'Monthly investment (&#8377;)', def: 5000 },
-            { label: 'Expected Return', placeholder: 'Expected return (%)', def: 12 },
-            { label: 'Investment Period', placeholder: 'Years', def: 10 }
+            { label: 'Monthly investment (₹)', placeholder: 'Monthly investment (₹)', def: 5000 },
+            { label: 'Expected return rate (% p.a.)', placeholder: 'Expected return rate (% p.a.)', def: 12 },
+            { label: 'Time period (Years)', placeholder: 'Time period (Years)', def: 10 }
           ]
         },
         lumpsum: {
-          icon: '<i class="bi bi-cash-stack"></i>', title: 'Lumpsum Calculator', label: 'Future Value',
+          icon: '<i class="bi bi-cash-stack"></i>', title: 'Lumpsum Calculator', label: 'Total value',
           desc: 'Project the growth of a one-time investment over time.',
           details: [
             'Grow a single large investment without monthly deposits.',
@@ -1034,9 +1036,9 @@
             'See the future value of your principal at maturity.'
           ],
           fields: [
-            { label: 'Principal Amount', placeholder: 'Principal amount (&#8377;)', def: 100000 },
-            { label: 'Expected Return', placeholder: 'Expected return (%)', def: 12 },
-            { label: 'Investment Period', placeholder: 'Years', def: 10 }
+            { label: 'Total investment (₹)', placeholder: 'Total investment (₹)', def: 100000 },
+            { label: 'Expected return rate (% p.a.)', placeholder: 'Expected return rate (% p.a.)', def: 12 },
+            { label: 'Time period (Years)', placeholder: 'Time period (Years)', def: 10 }
           ]
         },
         swp: {
@@ -1048,10 +1050,10 @@
             'Estimate the corpus remaining after your withdrawal period.'
           ],
           fields: [
-            { label: 'Corpus Amount', placeholder: 'Corpus amount (&#8377;)', def: 5000000 },
-            { label: 'Expected Return', placeholder: 'Expected return (%)', def: 8 },
-            { label: 'Monthly Withdrawal', placeholder: 'Monthly withdrawal (&#8377;)', def: 25000 },
-            { label: 'Withdrawal Period', placeholder: 'Withdrawal years', def: 10 }
+            { label: 'Total investment (₹)', placeholder: 'Total investment (₹)', def: 5000000 },
+            { label: 'Withdrawal per month (₹)', placeholder: 'Withdrawal per month (₹)', def: 25000 },
+            { label: 'Expected return rate (% p.a.)', placeholder: 'Expected return rate (% p.a.)', def: 8 },
+            { label: 'Time period (Years)', placeholder: 'Time period (Years)', def: 10 }
           ]
         },
         goal: {
@@ -1059,13 +1061,15 @@
           desc: 'Calculate the monthly amount needed to reach your financial goal.',
           details: [
             'Set a target amount for any future goal.',
-            'Estimate the SIP needed to achieve that goal.',
+            'Include existing investments to reduce required monthly amount.',
+            'Estimate the monthly SIP needed to achieve that goal.',
             'Start investing today to reach your target on time.'
           ],
           fields: [
-            { label: 'Goal Amount', placeholder: 'Goal amount (&#8377;)', def: 1000000 },
-            { label: 'Expected Return', placeholder: 'Expected return (%)', def: 12 },
-            { label: 'Time Horizon', placeholder: 'Years', def: 10 }
+            { label: 'Goal amount (₹)', placeholder: 'Goal amount (₹)', def: 1000000 },
+            { label: 'Current investment (₹)', placeholder: 'Current investment (₹)', def: 0 },
+            { label: 'Expected return rate (% p.a.)', placeholder: 'Expected return rate (% p.a.)', def: 12 },
+            { label: 'Time period (Years)', placeholder: 'Time period (Years)', def: 10 }
           ]
         },
         retirement: {
@@ -1077,9 +1081,14 @@
             'Estimate your required monthly savings instantly.'
           ],
           fields: [
-            { label: 'Target Corpus', placeholder: 'Target corpus (&#8377;)', def: 20000000 },
-            { label: 'Expected Return', placeholder: 'Expected return (%)', def: 12 },
-            { label: 'Years to Retire', placeholder: 'Years to retire', def: 20 }
+            { label: 'Current age (Years)', placeholder: 'Current age (Years)', def: 30 },
+            { label: 'Retirement age (Years)', placeholder: 'Retirement age (Years)', def: 60 },
+            { label: 'Current monthly expenses (₹)', placeholder: 'Current monthly expenses (₹)', def: 50000 },
+            { label: 'Expected inflation (% p.a.)', placeholder: 'Expected inflation (% p.a.)', def: 6 },
+            { label: 'Pre-retirement return (% p.a.)', placeholder: 'Pre-retirement return (% p.a.)', def: 12 },
+            { label: 'Post-retirement return (% p.a.)', placeholder: 'Post-retirement return (% p.a.)', def: 8 },
+            { label: 'Life expectancy (Years)', placeholder: 'Life expectancy (Years)', def: 85 },
+            { label: 'Existing savings (₹)', placeholder: 'Existing savings (₹)', def: 500000 }
           ]
         },
         inflation: {
@@ -1091,27 +1100,28 @@
             'Know the real future value of your money.'
           ],
           fields: [
-            { label: 'Current Cost', placeholder: 'Current cost (&#8377;)', def: 50000 },
-            { label: 'Inflation Rate', placeholder: 'Inflation rate (%)', def: 6 },
-            { label: 'Time Period', placeholder: 'Years', def: 10 }
+            { label: 'Current cost (₹)', placeholder: 'Current cost (₹)', def: 50000 },
+            { label: 'Inflation rate (% p.a.)', placeholder: 'Inflation rate (% p.a.)', def: 6 },
+            { label: 'Time period (Years)', placeholder: 'Time period (Years)', def: 10 }
           ]
         },
         tax: {
-          icon: '<i class="bi bi-graph-up-arrow"></i>', title: 'Income Tax Calculator', label: 'Estimated Tax',
+          icon: '<i class="bi bi-graph-up-arrow"></i>', title: 'Income Tax Calculator', label: 'Estimated tax',
           desc: 'Compute your tax liability under the current tax regime.',
           details: [
-            'Enter your income to estimate your annual tax.',
+            'Enter your annual income to estimate your tax.',
             'Include deductions to lower your tax burden.',
             'Get a quick estimate of your total tax due.'
           ],
           fields: [
-            { label: 'Annual Income', placeholder: 'Annual income (&#8377;)', def: 500000 },
-            { label: 'Deductions', placeholder: 'Deductions (&#8377;)', def: 50000 },
-            { label: 'Tax Regime Rate', placeholder: 'Tax regime %', def: 20 }
+            { label: 'Annual income (₹ per annum)', placeholder: 'Annual income (₹ per annum)', def: 1000000 },
+            { label: 'Deductions (80C) (₹)', placeholder: 'Deductions (80C) (₹)', def: 150000 },
+            { label: 'Other deductions (₹)', placeholder: 'Other deductions (₹)', def: 0 },
+            { label: 'Tax regime', placeholder: 'Tax regime', def: 'new' }
           ]
         },
         fd: {
-          icon: '<i class="bi bi-piggy-bank"></i>', title: 'FD Calculator', label: 'Maturity Amount',
+          icon: '<i class="bi bi-piggy-bank"></i>', title: 'FD Calculator', label: 'Total value',
           desc: 'Estimate returns on your fixed deposit investment.',
           details: [
             'Earn guaranteed interest on a one-time deposit.',
@@ -1119,9 +1129,10 @@
             'Estimate your final maturity amount instantly.'
           ],
           fields: [
-            { label: 'Deposit Amount', placeholder: 'Deposit amount (&#8377;)', def: 100000 },
-            { label: 'Interest Rate', placeholder: 'Interest rate (%)', def: 7 },
-            { label: 'Deposit Tenure', placeholder: 'Tenure (years)', def: 5 }
+            { label: 'Total investment (₹)', placeholder: 'Total investment (₹)', def: 100000 },
+            { label: 'Rate of interest (% p.a.)', placeholder: 'Rate of interest (% p.a.)', def: 7 },
+            { label: 'Time period (Years)', placeholder: 'Time period (Years)', def: 5 },
+            { label: 'Compounding frequency', placeholder: 'Compounding frequency', def: 'quarterly' }
           ]
         },
         rd: {
@@ -1129,13 +1140,13 @@
           desc: 'Project the maturity value of recurring monthly deposits.',
           details: [
             'Save a fixed amount every month with discipline.',
-            'Interest compounds quarterly on your deposits.',
+            'Interest compounds on your deposits.',
             'Estimate the total amount at maturity.'
           ],
           fields: [
-            { label: 'Monthly Deposit', placeholder: 'Monthly deposit (&#8377;)', def: 5000 },
-            { label: 'Interest Rate', placeholder: 'Interest rate (%)', def: 7 },
-            { label: 'Deposit Tenure', placeholder: 'Tenure (years)', def: 5 }
+            { label: 'Monthly investment (₹)', placeholder: 'Monthly investment (₹)', def: 5000 },
+            { label: 'Expected return rate (% p.a.)', placeholder: 'Expected return rate (% p.a.)', def: 7 },
+            { label: 'Time period (Years)', placeholder: 'Time period (Years)', def: 5 }
           ]
         },
         emi: {
@@ -1143,13 +1154,13 @@
           desc: 'Plan your loan repayments with accurate monthly EMI estimates.',
           details: [
             'Plan home, car, or personal loan repayments.',
-            'See your fixed monthly payment instantly.',
+            'See your fixed monthly EMI instantly.',
             'Compare tenures to pick the right loan plan.'
           ],
           fields: [
-            { label: 'Loan Amount', placeholder: 'Loan amount (&#8377;)', def: 5000000 },
-            { label: 'Interest Rate', placeholder: 'Interest rate (%)', def: 9 },
-            { label: 'Loan Tenure', placeholder: 'Loan tenure (years)', def: 20 }
+            { label: 'Loan amount (₹)', placeholder: 'Loan amount (₹)', def: 5000000 },
+            { label: 'Rate of interest (% p.a.)', placeholder: 'Rate of interest (% p.a.)', def: 9 },
+            { label: 'Loan tenure (Years)', placeholder: 'Loan tenure (Years)', def: 20 }
           ]
         }
       };
@@ -1173,7 +1184,21 @@
         var html = '';
         c.fields.forEach(function (f, i) {
           html += '<label for="cf-' + key + '-' + i + '">' + f.label + '</label>';
-          html += '<input type="number" id="cf-' + key + '-' + i + '" class="cf-input" data-idx="' + i + '" placeholder="' + f.placeholder + '" value="' + f.def + '">';
+          if (typeof f.def === 'string' && (f.def === 'new' || f.def === 'old' || f.def === 'yearly' || f.def === 'quarterly' || f.def === 'monthly' || f.def === 'half-yearly' || f.def === 'yes' || f.def === 'no')) {
+            // Handle dropdown/select inputs
+            var options = '';
+            if (f.def === 'new' || f.def === 'old') {
+              options = '<option value="new" ' + (f.def === 'new' ? 'selected' : '') + '>New Regime</option><option value="old" ' + (f.def === 'old' ? 'selected' : '') + '>Old Regime</option>';
+            } else if (f.def === 'yes' || f.def === 'no') {
+              options = '<option value="no" ' + (f.def === 'no' ? 'selected' : '') + '>No</option><option value="yes" ' + (f.def === 'yes' ? 'selected' : '') + '>Yes</option>';
+            } else {
+              options = '<option value="yearly" ' + (f.def === 'yearly' ? 'selected' : '') + '>Yearly</option><option value="half-yearly" ' + (f.def === 'half-yearly' ? 'selected' : '') + '>Half-Yearly</option><option value="quarterly" ' + (f.def === 'quarterly' ? 'selected' : '') + '>Quarterly</option><option value="monthly" ' + (f.def === 'monthly' ? 'selected' : '') + '>Monthly</option>';
+            }
+            html += '<select id="cf-' + key + '-' + i + '" class="cf-input" data-idx="' + i + '">' + options + '</select>';
+          } else {
+            // Handle number inputs
+            html += '<input type="number" id="cf-' + key + '-' + i + '" class="cf-input" data-idx="' + i + '" placeholder="' + f.placeholder + '">';
+          }
         });
         html += '<div class="result" id="cf-result"></div>';
         html += '<button type="button" class="calc-btn">Calculate</button>';
@@ -1185,85 +1210,294 @@
         if (btn) btn.addEventListener('click', updateResult);
         updateResult();
       }
-      function fmt(x) {
-        if (!isFinite(x)) x = 0;
-        return Math.round(x).toLocaleString('en-IN');
+      // Enhanced Indian number formatting
+      function fmt(x, decimals) {
+        if (!isFinite(x) || isNaN(x)) x = 0;
+        if (x < 0) x = 0;
+        var decimalPlaces = decimals !== undefined ? decimals : 0;
+        return x.toLocaleString('en-IN', {
+          minimumFractionDigits: decimalPlaces,
+          maximumFractionDigits: decimalPlaces
+        });
       }
+
+      // Validation utilities
+      function validatePositive(value, fieldName) {
+        if (isNaN(value) || value <= 0) {
+          return { valid: false, message: fieldName + ' must be greater than 0' };
+        }
+        return { valid: true };
+      }
+
+      function validateNonNegative(value, fieldName) {
+        if (isNaN(value) || value < 0) {
+          return { valid: false, message: fieldName + ' must be 0 or greater' };
+        }
+        return { valid: true };
+      }
+
+      function validatePercentage(value, fieldName) {
+        if (isNaN(value) || value < 0 || value > 100) {
+          return { valid: false, message: fieldName + ' must be between 0 and 100' };
+        }
+        return { valid: true };
+      }
+
+      function validateRange(value, min, max, fieldName) {
+        if (isNaN(value) || value < min || value > max) {
+          return { valid: false, message: fieldName + ' must be between ' + min + ' and ' + max };
+        }
+        return { valid: true };
+      }
+      // Disable old-regime-only deduction inputs under the New Regime and
+      // mark them as not applicable; re-enable them under the Old Regime.
+      function updateTaxInputs() {
+        var regimeSel = document.getElementById('cf-tax-3');
+        if (!regimeSel) return;
+        var isNew = regimeSel.value === 'new';
+        [['cf-tax-1', 'Deductions (80C)'], ['cf-tax-2', 'Other deductions']].forEach(function (pair) {
+          var inp = document.getElementById(pair[0]);
+          var lbl = form.querySelector('label[for="' + pair[0] + '"]');
+          if (inp) { inp.disabled = isNew; inp.style.opacity = isNew ? '.5' : '1'; }
+          if (lbl) lbl.innerHTML = pair[1] + (isNew ? ' <em style="font-size:11px;color:#ff8a8a;">(Not applicable under New Regime)</em>' : '');
+        });
+      }
+
       function updateResult() {
         var box = form.querySelector('#cf-result');
         if (!box) return;
+        if (current === 'tax') updateTaxInputs();
         var vals = [];
         form.querySelectorAll('.cf-input').forEach(function (el) {
-          vals.push(parseFloat(el.value) || 0);
+          if (el.tagName === 'SELECT') {
+            vals.push(el.value);
+          } else {
+            vals.push(parseFloat(el.value) || 0);
+          }
         });
         var a = vals[0] || 0;
         var b = vals[1] || 0;
         var c = vals[2] || 0;
         var d = vals[3] || 0;
+        var e = vals[4] || 0;
+        var f = vals[5] || 0;
+        var g = vals[6] || 0;
+        var h = vals[7] || 0;
         var calcType = current;
         var v = 0;
+        var validationResult = { valid: true, message: '' };
+
+        // Neutral empty state: no results until the user enters values.
+        var anyValue = false;
+        form.querySelectorAll('.cf-input').forEach(function (el) {
+          if (el.tagName !== 'SELECT' && el.value !== '') anyValue = true;
+        });
+        if (!anyValue) {
+          box.innerHTML = '<div class="r-row"><span>Enter your details above to see the result.</span></div>';
+          return;
+        }
+
+        // Tax is now computed via the shared CalcEngine (calculateIncomeTax) so the
+        // homepage stays consistent with the dedicated calculator and current FY slabs.
+
+        // Validation based on calculator type
+        switch(calcType) {
+          case 'sip':
+            validationResult = validatePositive(a, 'Monthly investment');
+            if (validationResult.valid) validationResult = validateNonNegative(b, 'Expected return');
+            if (validationResult.valid) validationResult = validatePositive(c, 'Time period');
+            break;
+          case 'lumpsum':
+            validationResult = validatePositive(a, 'Total investment');
+            if (validationResult.valid) validationResult = validateNonNegative(b, 'Expected return');
+            if (validationResult.valid) validationResult = validatePositive(c, 'Time period');
+            break;
+          case 'swp':
+            validationResult = validatePositive(a, 'Total investment');
+            if (validationResult.valid) validationResult = validatePositive(b, 'Withdrawal amount');
+            if (validationResult.valid) validationResult = validateNonNegative(c, 'Expected return');
+            if (validationResult.valid) validationResult = validatePositive(d, 'Time period');
+            break;
+          case 'goal':
+            validationResult = validatePositive(a, 'Goal amount');
+            if (validationResult.valid) validationResult = validateNonNegative(b, 'Current investment');
+            if (validationResult.valid) validationResult = validateNonNegative(c, 'Expected return');
+            if (validationResult.valid) validationResult = validatePositive(d, 'Time period');
+            break;
+          case 'retirement':
+            validationResult = validateRange(a, 18, 80, 'Current age');
+            if (validationResult.valid) validationResult = validateRange(b, a + 1, 100, 'Retirement age');
+            if (validationResult.valid) validationResult = validatePositive(c, 'Current monthly expenses');
+            if (validationResult.valid) validationResult = validateRange(d, 0, 20, 'Inflation rate');
+            if (validationResult.valid) validationResult = validateRange(e, 0, 30, 'Pre-retirement return');
+            if (validationResult.valid) validationResult = validateRange(f, 0, 20, 'Post-retirement return');
+            if (validationResult.valid) validationResult = validateRange(g, b + 1, 120, 'Life expectancy');
+            if (validationResult.valid) validationResult = validateNonNegative(h, 'Existing savings');
+            break;
+          case 'inflation':
+            validationResult = validatePositive(a, 'Current cost');
+            if (validationResult.valid) validationResult = validateNonNegative(b, 'Inflation rate');
+            if (validationResult.valid) validationResult = validatePositive(c, 'Time period');
+            break;
+          case 'tax':
+            validationResult = validatePositive(a, 'Annual income');
+            if (validationResult.valid) validationResult = validateNonNegative(b, 'Deductions (80C)');
+            if (validationResult.valid) validationResult = validateNonNegative(c, 'Other deductions');
+            break;
+          case 'fd':
+            validationResult = validatePositive(a, 'Total investment');
+            if (validationResult.valid) validationResult = validateNonNegative(b, 'Interest rate');
+            if (validationResult.valid) validationResult = validatePositive(c, 'Time period');
+            // FD now has 4 fields, so we need to handle the compounding frequency
+            break;
+          case 'rd':
+            validationResult = validatePositive(a, 'Monthly investment');
+            if (validationResult.valid) validationResult = validateNonNegative(b, 'Interest rate');
+            if (validationResult.valid) validationResult = validatePositive(c, 'Time period');
+            break;
+          case 'emi':
+            validationResult = validatePositive(a, 'Loan amount');
+            if (validationResult.valid) validationResult = validateNonNegative(b, 'Interest rate');
+            if (validationResult.valid) validationResult = validatePositive(c, 'Loan tenure');
+            break;
+        }
+
+        if (!validationResult.valid) {
+          box.innerHTML = '<div class="r-row" style="color: #ff5a5a;"><span>' + validationResult.message + '</span></div>';
+          return;
+        }
 
         switch(calcType) {
           case 'sip':
-            var r = b / 12 / 100;
-            var n = c * 12;
-            v = r > 0 ? a * ((Math.pow(1 + r, n) - 1) / r) * (1 + r) : a * n;
+            v = CalcEngine.calculateSIP({ monthlyInvestment: a, returnRate: b, years: c }).totalValue;
             break;
           case 'lumpsum':
-            v = a * Math.pow(1 + b / 100, c);
+            v = CalcEngine.calculateLumpsum({ amount: a, returnRate: b, years: c }).totalValue;
             break;
           case 'swp':
-            var r = b / 12 / 100;
-            var n = c * 12;
-            var f = Math.pow(1 + r, n);
-            v = r > 0 ? a * f - d * ((f - 1) / r) : a - d * n;
-            if (v < 0) v = 0;
+            var swpRes = CalcEngine.calculateSWP({ initial: a, monthlyWithdrawal: b, returnRate: c, years: d });
+            v = { finalBalance: Math.round(swpRes.finalBalance * 100) / 100, totalWithdrawal: Math.round(swpRes.totalWithdrawn * 100) / 100 };
             break;
           case 'goal':
-            var r = b / 12 / 100;
-            var n = c * 12;
-            v = r > 0 ? a * r / (Math.pow(1 + r, n) - 1) * (1 + r) : a / n;
-            break;
+            var gRes = CalcEngine.calculateGoal({ target: a, current: b, returnRate: c, years: d });
+            v = Math.round(gRes.requiredSIP * 100) / 100;
+            box.innerHTML =
+              '<div class="r-row"><span>Target amount</span><strong>&#8377; ' + fmt(a) + '</strong></div>' +
+              '<div class="r-row"><span>Current investment</span><strong>&#8377; ' + fmt(b) + '</strong></div>' +
+              '<div class="r-row"><span>Current investment FV</span><strong>&#8377; ' + fmt(Math.round(gRes.currentFV * 100) / 100) + '</strong></div>' +
+              '<div class="r-row"><span>Additional required</span><strong>&#8377; ' + fmt(Math.round(Math.max(0, gRes.required) * 100) / 100) + '</strong></div>' +
+              '<div class="r-row r-total"><span>Required monthly SIP</span><strong>&#8377; ' + fmt(v) + '</strong></div>' +
+              (gRes.noAdditionalNeeded ? '<div class="r-note">&#10003; Your current investment already meets the goal &mdash; no additional monthly SIP is required.</div>' : '');
+            return;
           case 'retirement':
-            var r = b / 12 / 100;
-            var n = c * 12;
-            v = r > 0 ? a * r / (Math.pow(1 + r, n) - 1) * (1 + r) : a / n;
-            break;
+            var rRes = CalcEngine.calculateRetirement({ currentAge: a, retirementAge: b, currentMonthlyExpense: c, inflationRate: d, returnBefore: e, returnAfter: f, lifeExpectancy: g, existingInvestment: h });
+            v = Math.round(rRes.monthlySIP * 100) / 100;
+            box.innerHTML =
+              '<div class="r-row"><span>Current monthly expense</span><strong>&#8377; ' + fmt(c) + '</strong></div>' +
+              '<div class="r-row"><span>Monthly expense at retirement</span><strong>&#8377; ' + fmt(Math.round(rRes.futureMonthlyExpense * 100) / 100) + '</strong></div>' +
+              '<div class="r-row"><span>Required retirement corpus</span><strong>&#8377; ' + fmt(Math.round(rRes.requiredCorpus * 100) / 100) + '</strong></div>' +
+              '<div class="r-row"><span>Existing savings FV</span><strong>&#8377; ' + fmt(Math.round(rRes.fvExisting * 100) / 100) + '</strong></div>' +
+              '<div class="r-row"><span>Additional corpus needed</span><strong>&#8377; ' + fmt(Math.round(rRes.additionalNeeded * 100) / 100) + '</strong></div>' +
+              '<div class="r-row r-total"><span>Required monthly SIP</span><strong>&#8377; ' + fmt(v) + '</strong></div>' +
+              (rRes.additionalNeeded <= 0 ? '<div class="r-note">&#10003; Your existing savings already meet the required retirement corpus &mdash; no additional monthly SIP is required.</div>' : '');
+            return;
           case 'inflation':
-            v = a * Math.pow(1 + b / 100, c);
-            break;
+            var iRes = CalcEngine.calculateInflation({ amount: a, inflationRate: b, years: c });
+            v = Math.round(iRes.futureValue * 100) / 100;
+            box.innerHTML =
+              '<div class="r-row"><span>Current cost</span><strong>&#8377; ' + fmt(a) + '</strong></div>' +
+              '<div class="r-row"><span>Inflation rate</span><strong>' + fmt(b, 1) + '%</strong></div>' +
+              '<div class="r-row"><span>Time period</span><strong>' + c + ' Years</strong></div>' +
+              '<div class="r-row"><span>Future cost</span><strong>&#8377; ' + fmt(v) + '</strong></div>' +
+              '<div class="r-row r-total"><span>Inflation impact</span><strong>&#8377; ' + fmt(Math.round(iRes.inflationImpact * 100) / 100) + '</strong></div>';
+            return;
           case 'tax':
-            var taxableIncome = Math.max(0, a - b);
-            v = taxableIncome * (c / 100);
-            break;
+            var tRes = CalcEngine.calculateIncomeTax({ financialYear: 'AY2026-27', regime: d, grossSalary: a, section80C: b, otherDeductions: c });
+            var tDD = tRes.deductionBreakdown || {};
+            box.innerHTML =
+              '<div class="r-row"><span>Gross total income</span><strong>&#8377; ' + fmt(tRes.grossTotalIncome) + '</strong></div>' +
+              '<div class="r-row"><span>Standard deduction (salary)</span><strong>&#8377; ' + fmt(tDD.standardDeduction || 0) + '</strong></div>' +
+              '<div class="r-row"><span>Deductions u/s 80C' + (d === 'new' ? ' <em style="font-size:11px;color:#ff8a8a;">(not applicable under New Regime)</em>' : '') + '</span><strong>&#8377; ' + fmt(tDD.section80C || 0) + '</strong></div>' +
+              '<div class="r-row"><span>Total eligible deductions</span><strong>&#8377; ' + fmt(tRes.totalDeductions) + '</strong></div>' +
+              '<div class="r-row"><span>Taxable income</span><strong>&#8377; ' + fmt(tRes.taxableIncome) + '</strong></div>' +
+              '<div class="r-row"><span>Tax before rebate (slab tax)</span><strong>&#8377; ' + fmt(tRes.taxBeforeRebate) + '</strong></div>' +
+              '<div class="r-row"><span>Rebate u/s 87A</span><strong>&minus; &#8377; ' + fmt(tRes.rebate) + '</strong></div>' +
+              '<div class="r-row"><span>Income tax after rebate</span><strong>&#8377; ' + fmt(Math.round(tRes.incomeTaxAfterRebate * 100) / 100) + '</strong></div>' +
+              '<div class="r-row"><span>Cess (4%)</span><strong>&#8377; ' + fmt(tRes.cess) + '</strong></div>' +
+              '<div class="r-row r-total"><span>Total tax payable</span><strong>&#8377; ' + fmt(tRes.totalTaxPayable) + '</strong></div>';
+            return;
           case 'fd':
-            var r = b / 4 / 100;
-            var n = c * 4;
-            v = a * Math.pow(1 + r, n);
+            v = CalcEngine.calculateFD({ principal: a, interestRate: b, tenure: c, compoundingFrequency: d }).maturityAmount;
             break;
           case 'rd':
-            var r = b / 12 / 100;
-            var n = c * 12;
-            v = r > 0 ? a * ((Math.pow(1 + r, n) - 1) / r) * (1 + r) : a * n;
+            v = CalcEngine.calculateRD({ monthlyDeposit: a, interestRate: b, years: c }).maturityAmount;
             break;
           case 'emi':
-            var r = b / 12 / 100;
-            var n = c * 12;
-            v = r > 0 ? a * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1) : a / n;
+            v = CalcEngine.calculateEMI({ loanAmount: a, interestRate: b, tenure: c }).emi;
             break;
           default:
             v = a * Math.pow(1 + b / 100, c);
         }
-        if (!isFinite(v)) v = 0;
+        if (typeof v !== 'object' && (!isFinite(v) || isNaN(v))) v = 0;
 
         if (calcType === 'sip') {
           var months = c * 12;
           var totalInvest = a * months;
           var estReturns = v - totalInvest;
           box.innerHTML =
-            '<div class="r-row"><span>Total Investment</span><strong>&#8377; ' + fmt(totalInvest) + '</strong></div>' +
-            '<div class="r-row"><span>Estimated Returns</span><strong>&#8377; ' + fmt(estReturns) + '</strong></div>' +
-            '<div class="r-row r-total"><span>Maturity Value</span><strong>&#8377; ' + fmt(v) + '</strong></div>';
+            '<div class="r-row"><span>Invested amount</span><strong>&#8377; ' + fmt(totalInvest) + '</strong></div>' +
+            '<div class="r-row"><span>Est. returns</span><strong>&#8377; ' + fmt(estReturns) + '</strong></div>' +
+            '<div class="r-row r-total"><span>Total value</span><strong>&#8377; ' + fmt(v) + '</strong></div>';
+        } else if (calcType === 'lumpsum') {
+          var estReturns = v - a;
+          box.innerHTML =
+            '<div class="r-row"><span>Invested amount</span><strong>&#8377; ' + fmt(a) + '</strong></div>' +
+            '<div class="r-row"><span>Est. returns</span><strong>&#8377; ' + fmt(estReturns) + '</strong></div>' +
+            '<div class="r-row r-total"><span>Total value</span><strong>&#8377; ' + fmt(v) + '</strong></div>';
+        } else if (calcType === 'fd') {
+          var estReturns = v - a;
+          box.innerHTML =
+            '<div class="r-row"><span>Invested amount</span><strong>&#8377; ' + fmt(a) + '</strong></div>' +
+            '<div class="r-row"><span>Est. returns</span><strong>&#8377; ' + fmt(estReturns) + '</strong></div>' +
+            '<div class="r-row r-total"><span>Total value</span><strong>&#8377; ' + fmt(v) + '</strong></div>';
+        } else if (calcType === 'rd') {
+          var totalInvest = a * c * 12;
+          var estReturns = v - totalInvest;
+          box.innerHTML =
+            '<div class="r-row"><span>Invested amount</span><strong>&#8377; ' + fmt(totalInvest) + '</strong></div>' +
+            '<div class="r-row"><span>Est. returns</span><strong>&#8377; ' + fmt(estReturns) + '</strong></div>' +
+            '<div class="r-row r-total"><span>Total value</span><strong>&#8377; ' + fmt(v) + '</strong></div>';
+        } else if (calcType === 'emi') {
+          // For EMI, variables are: a=loan, b=rate, c=tenure
+          var totalInterest = (v * c * 12) - a;
+          var totalAmount = v * c * 12;
+          box.innerHTML =
+            '<div class="r-row"><span>Monthly EMI</span><strong>&#8377; ' + fmt(v) + '</strong></div>' +
+            '<div class="r-row"><span>Principal amount</span><strong>&#8377; ' + fmt(a) + '</strong></div>' +
+            '<div class="r-row"><span>Total interest</span><strong>&#8377; ' + fmt(totalInterest) + '</strong></div>' +
+            '<div class="r-row r-total"><span>Total amount</span><strong>&#8377; ' + fmt(totalAmount) + '</strong></div>';
+        } else if (calcType === 'swp') {
+          // Handle the new SWP object structure
+          var finalBalance = typeof v === 'object' ? v.finalBalance : v;
+          var totalWithdrawal = typeof v === 'object' ? v.totalWithdrawal : b * d * 12;
+          var estimatedReturns = (finalBalance + totalWithdrawal) - a;
+          box.innerHTML =
+            '<div class="r-row"><span>Total investment</span><strong>&#8377; ' + fmt(a) + '</strong></div>' +
+            '<div class="r-row"><span>Total withdrawal</span><strong>&#8377; ' + fmt(totalWithdrawal) + '</strong></div>' +
+            '<div class="r-row"><span>Est. returns</span><strong>&#8377; ' + fmt(estimatedReturns) + '</strong></div>' +
+            '<div class="r-row r-total"><span>Final value</span><strong>&#8377; ' + fmt(finalBalance) + '</strong></div>';
+        } else if (calcType === 'goal') {
+          // Goal calculator results are handled in the switch statement
+          return;
+        } else if (calcType === 'retirement') {
+          // Retirement calculator results are handled in the switch statement
+          return;
+        } else if (calcType === 'inflation') {
+          // Inflation calculator results are handled in the switch statement
+          return;
+        } else if (calcType === 'tax') {
+          // Tax calculator results are handled in the switch statement
+          return;
         } else {
           box.innerHTML = '<div class="r-row"><span>' + calcs[calcType].label + '</span><strong>&#8377; ' + fmt(v) + '</strong></div>';
         }

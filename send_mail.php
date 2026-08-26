@@ -127,7 +127,7 @@ $ownerHtml    = buildLayout2('receiver', $name, $email, $phone, $subject, $messa
 
 /* ---- build auto-reply mail (to visitor) — Layout 2: Left Accent Card ---- */
 $autoText = "Hello $name,\n\n"
-          . "Thank you for contacting AlphaGrow. We have received your enquiry and one of our advisors will get back to you within one business day.\n\n"
+          . "Thank you for contacting AlphaGrow. We have received your enquiry and one of our advisors will get back to you soon.\n\n"
           . "Your message:\n\"$message\"\n\n"
           . "Warm regards,\nThe AlphaGrow Team\n+91 87545 00310\ninvestalphagrow@gmail.com\n\n"
           . "Tip: if this confirmation landed in your Spam or Junk folder, just mark it as 'Not spam' so our future replies reach your inbox.";
@@ -265,7 +265,7 @@ function buildLayout2($role, $name, $email, $phone, $service, $message, $logo) {
     } else {
         $eyebrow  = 'AlphaGrow';
         $title    = 'Thank you, ' . htmlspecialchars($name) . '!';
-        $lead     = "We've received your enquiry and one of our advisors will reach out within <strong>one business day</strong>.";
+        $lead     = "We've received your enquiry and one of our advisors will reach out <strong>soon</strong>.";
         $detTitle = 'Your Message';
         $rows     = emailRow('Service', htmlspecialchars($service))
                   . emailRow('Email',   htmlspecialchars($email))
