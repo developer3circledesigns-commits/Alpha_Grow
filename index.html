@@ -24,7 +24,7 @@
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  section[id] { scroll-margin-top: 80px; }
+  section[id] { scroll-margin-top: 112px; }
   body { font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); background: #ffffff; line-height: 1.6; overflow-x: hidden; }
   a { text-decoration: none; }
   img { display: block; max-width: 100%; }
@@ -48,10 +48,10 @@
 
   /* ---------- NAV ---------- */
   header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: #fff; border: 0; border-radius: 0; }
-  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 70px; padding: 0 24px; max-width: 100%; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 102px; padding: 0 24px; max-width: 100%; }
   .brand { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -.02em; flex-shrink: 0; }
   .brand span { color: var(--green); }
-  .brand-logo { height: 44px; width: auto; display: block; object-fit: contain; }
+  .brand-logo { height: 80px; width: auto; display: block; object-fit: contain; }
   .nav-links { display: flex; gap: 30px; align-items: center; margin-left: auto; }
   .nav-links a { color: #0b1b33; font-size: 15px; font-weight: 500; transition: color .15s ease; }
   .nav-links a:hover { color: var(--blue); }
@@ -61,7 +61,7 @@
   .nav-call { display: none; align-items: center; justify-content: center; width: 44px; height: 44px; margin-left: auto; background: var(--green); color: #04281a; border-radius: 50%; font-size: 19px; flex-shrink: 0; }
 
   /* ---------- HERO (09 Dark Blue) ---------- */
-  .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; text-align: left; padding: 120px 24px 40px 64px; position: relative; overflow: hidden; background: linear-gradient(135deg, #0a3d62 0%, #128c7e 100%); color: #fff; }
+  .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; text-align: left; padding: 152px 24px 40px 64px; position: relative; overflow: hidden; background: linear-gradient(135deg, #0a3d62 0%, #128c7e 100%); color: #fff; }
   .hero::before { content: ''; position: absolute; inset: 0;
     background:
       linear-gradient(rgba(10,61,98,.5), rgba(18,140,124,.45)),
@@ -281,8 +281,8 @@
   /* footer */
   footer { background: var(--navy-deep); color: rgba(255,255,255,.7); padding: 60px 0 30px; }
   .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 44px; }
-  .footer-brand .brand { font-size: 24px; margin-bottom: 14px; }
-  .footer-brand .brand img { filter: brightness(1.25); }
+  .footer-brand .brand { font-size: 24px; margin-bottom: 28px; display: inline-block; }
+  .footer-brand .brand img { filter: brightness(1.25); height: 80px; width: auto; display: block; object-fit: contain; }
   .footer-brand p { font-size: 14px; max-width: 260px; }
   .footer-col h4 { color: #fff; font-size: 15px; margin-bottom: 16px; }
   .footer-col a { display: block; color: rgba(255,255,255,.7); font-size: 14px; padding: 6px 0; transition: color .15s ease; }
@@ -296,10 +296,13 @@
 
   /* ---------- TABLET (<=1024px) ---------- */
   @media (max-width: 1024px) {
+    .nav-inner { height: 88px; }
+    .brand-logo { height: 64px; }
+    .footer-brand .brand img { height: 64px; }
     /* collapse navbar into hamburger on tablets (desktop >1024 keeps full nav) */
     .nav-links {
       display: none;
-      position: absolute; top: 70px; left: 0; right: 0;
+      position: absolute; top: 88px; left: 0; right: 0;
       flex-direction: column; gap: 0;
       background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.12); padding: 12px 24px;
     }
@@ -319,6 +322,9 @@
   /* ---------- TABLET PORTRAIT (<=768px) ---------- */
   @media (max-width: 768px) {
     .container { padding: 0 20px; }
+    .nav-inner { height: 78px; padding: 0 20px; }
+    .brand-logo { height: 56px; }
+    .footer-brand .brand img { height: 56px; }
     .section.block { padding: 76px 0; }
     .about { padding: 64px 0; }
     /* Hero matches hero-image proportions (1376x768) but always grows to fit
@@ -336,6 +342,10 @@
 
   /* ---------- MOBILE (<=640px) ---------- */
   @media (max-width: 640px) {
+    .nav-inner { height: 70px; padding: 0 20px; }
+    .brand-logo { height: 48px; }
+    .footer-brand .brand img { height: 48px; }
+    .nav-links { top: 70px !important; }
     .feat-grid, .calc-grid, .svc-grid, .steps { grid-template-columns: 1fr; }
     .stats-grid { grid-template-columns: 1fr 1fr; }   /* 4 stats stay 2-up on phones */
     .steps-4 { grid-template-columns: 1fr 1fr; }       /* 4 steps stay 2-up on phones */
@@ -367,7 +377,12 @@
   /* ---------- SMALL MOBILE (<=480px) ---------- */
   @media (max-width: 480px) {
     .container { padding: 0 16px; }
-    .nav-inner { padding: 0 16px; }
+    .nav-inner { padding: 0 16px; height: 64px; }
+    .brand-logo { height: 42px; }
+    .footer-brand .brand img { height: 42px; }
+    .nav-links { top: 64px !important; }
+    .nav-call { width: 38px; height: 38px; font-size: 16px; }
+    .menu-btn { font-size: 22px; }
     .section.block { padding: 52px 0; }
     .hero { padding: 28px 16px 26px; }
     .hero h1 { line-height: 1.14; font-size: clamp(1.85rem, 7.5vw, 2.5rem); }
@@ -392,6 +407,11 @@
 
   /* ---------- TINY MOBILE (<=360px) ---------- */
   @media (max-width: 360px) {
+    .nav-inner { height: 56px; padding: 0 12px; }
+    .brand-logo { height: 36px; }
+    .footer-brand .brand img { height: 36px; }
+    .nav-links { top: 56px !important; }
+    .container { padding: 0 12px; }
     .hero h1 { font-size: clamp(1.9rem, 8vw, 2.3rem); }
     .cta .btn { width: 100%; justify-content: center; }
     .section-head h2 { font-size: clamp(1.55rem, 7vw, 2rem); }
@@ -404,7 +424,7 @@
   <!-- ======= NAV ======= -->
   <header>
     <div class="nav-inner">
-<a href="#home" class="brand"><img class="brand-logo" src="images/logo.png" alt="Alpha Grow logo" width="170" height="44"></a>
+<a href="#home" class="brand"><img class="brand-logo" src="images/logo.png" alt="Alpha Grow logo" width="308" height="80"></a>
       <nav class="nav-links">
         <a href="#home">Home</a>
         <a href="#about">About Us</a>
@@ -443,7 +463,8 @@
         <div class="about-copy anim anim-d1">
           <h2>Building Wealth Through <span class="green">Smart Financial Decisions</span></h2>
           <p>Investing is like a farmer growing trees &mdash; you plant the seed, water it, wait patiently, and finally enjoy the fruits. The same principle applies to wealth creation: disciplined saving, consistent investing, and time allow your money to grow and bear fruit.</p>
-          <ul style="margin:28px 0 0;padding:0;list-style:none;">
+          <h3 style="margin:28px 0 14px;font-size:1.35rem;font-weight:800;color:var(--blue);letter-spacing:-.01em;line-height:1.3;">Our Investment Strategies</h3>
+          <ul style="margin:0;padding:0;list-style:none;">
             <li style="display:flex;margin-bottom:12px;"><span style="width:24px;flex-shrink:0;">&#10003;</span><span><strong>The Safety Net (Protection First)</strong></span></li>
             <li style="display:flex;margin-bottom:12px;"><span style="width:24px;flex-shrink:0;">&#10003;</span><span><strong>Debt Freedom (The Financial Clean-Up)</strong></span></li>
             <li style="display:flex;margin-bottom:12px;"><span style="width:24px;flex-shrink:0;">&#10003;</span><span><strong>Wealth Accumulation (Growing Your Money)</strong></span></li>
@@ -841,7 +862,7 @@
               <div class="col-12"><label class="form-label">Services</label><select class="form-select rounded-0 border-secondary-subtle" name="subject"><option selected>General Inquiry</option><option>Personal Financial Planning</option><option>Mutual Fund Investment</option><option>Child Education Investment</option><option>Goal Based Investment</option><option>Retirement Planning</option><option>Health Insurance Plan</option><option>Life Insurance Plan</option><option>Emergency Fund</option><option>Bonds</option></select></div>
               <div class="col-12"><label class="form-label">Message <span class="text-muted" style="font-weight:400;">(optional)</span></label><textarea class="form-control" name="message" rows="4" placeholder="How can we help you? (optional)"></textarea></div>
               <div class="col-12">
-                <label class="form-label">Human verification</label>
+                <label class="form-label">Complete CAPTCHA</label>
                 <div class="captcha-row">
                   <img id="captcha-img" src="captcha.php" alt="CAPTCHA code" class="captcha-img">
                   <button type="button" id="captcha-refresh" class="btn-captcha-refresh" aria-label="Refresh captcha">&#8635;</button>
@@ -862,7 +883,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-<a href="#home" class="brand"><img class="brand-logo" src="images/logo.png" alt="Alpha Grow logo" width="170" height="44"></a>
+<a href="#home" class="brand"><img class="brand-logo" src="images/logo.png" alt="Alpha Grow logo" width="308" height="80"></a>
           <p>Your trusted partner in wealth creation and financial security. Personalized guidance for every goal.</p>
         </div>
         <div class="footer-col">
@@ -889,6 +910,8 @@
           <h4>Contact</h4>
           <a href="tel:+918754500310">+91 87545 00310</a>
           <a href="mailto:investalphagrow@gmail.com">investalphagrow@gmail.com</a>
+          <a href="mailto:info@alphagrowwealth.in">info@alphagrowwealth.in</a>
+          <a href="mailto:support@alphagrowwealth.in">support@alphagrowwealth.in</a>
           <a href="#contact">Chennai, India</a>
         </div>
       </div>
